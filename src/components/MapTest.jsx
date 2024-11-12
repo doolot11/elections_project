@@ -17,7 +17,7 @@ const MapTest = ({setData}) => {
 ];
 
   return (
-    <Box sx={{ width: "100%", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+    <Box sx={{ width: "100%", height: "auto", display: "flex", justifyContent: "center", alignItems: "center" }}>
       <svg
         xmlnsMapsvg="http://mapsvg.com"
         xmlnsDc="http://purl.org/dc/elements/1.1/"
@@ -25,14 +25,16 @@ const MapTest = ({setData}) => {
         xmlnsSvg="http://www.w3.org/2000/svg"
         xmlns="http://www.w3.org/2000/svg"
         mapsvgGeoViewBox="69.259411 43.256543 80.288715 39.169714"
-        width="792.38214"
-        height="389.39474">
+        width="100%"
+        height="389.39474"
+        // viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"
+        >
           {paths.map((path, index) => (
         <path
           key={path.id}
           d={path.d} 
           style={{
-            stroke: '#66CDAA',
+            stroke: 'var(--main)',
             fill: clickedIndex === index
               ? '#A9A9A9' 
               : hoveredIndex === index

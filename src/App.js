@@ -4,6 +4,8 @@ import InfoBlog from "./components/InfoBlog";
 import { useState } from "react";
 import Carousel from "./components/Carousel";
 import MapWithCities from "./components/MapWithCities";
+import logoIcon from "./images/png/logo.png"
+import styled from "@emotion/styled";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,9 +45,10 @@ function App() {
 
   return (
 
-    <Box>
-      <Box sx={{ background: "white", textAlign: "center", padding: "10px" }}>
-        <h1 style={{ color: "#20B2AA", fontWeight: "500", fontSize: "35px" }}>Парламент 2024</h1>
+    <Box sx={{display:"flex",flexDirection:"column",gap:"auto"}}>
+      <Box sx={{ background: "white", textAlign: "center", padding: "0" }}>
+        {/* <h1 style={{ color: "var(--main)", fontWeight: "500", fontSize: "35px" }}>Парламент 2024</h1> */}
+        <img style={{height:"130px"}} src={logoIcon} alt="Логотип"/>
       </Box>
       <Box>
         <Carousel />
@@ -66,7 +69,7 @@ function App() {
           < Tab value={1} {...a11yProps(1)} sx={{ "&.Mui-selected": { color: "white" } }} label="ОДНОМАНДАТНЫЕ ОКРУГА" />
         </Tabs>
       </Box>
-      <Box sx={{ display: "grid", gridTemplateColumns: "80% 20%", alignItems: "start" }}>
+      <ContinerBlog>
         <TabPanel value={value} index={0}>
           <MapTest setData={setData} />
         </TabPanel>
@@ -74,9 +77,28 @@ function App() {
           <MapWithCities setData={setData} />
         </TabPanel>
         <InfoBlog data={data} />
-      </Box>
+      </ContinerBlog>
     </Box>
   );
 }
 
 export default App;
+
+
+const ContinerBlog = styled(Box)`
+  display:grid;
+  grid-template-columns: 80% 20%;
+  align-items:start;
+  width: 80%;
+  margin:50px auto;
+  max-width:1400px;
+
+
+  @media screen and (max-width:1200px) {
+    grid-template-columns: 70% 20%;
+  }
+
+  @media screen and (max-width:992px) {
+    grid-template-columns: 1fr;
+  }
+`

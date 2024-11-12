@@ -15,13 +15,39 @@ import { Pagination , Navigation} from 'swiper/modules';
 
 export default function Carousel() {
   return (
-    <Box sx={{padding:"30px 50px"}}>
+    <Box sx={{padding:"30px 50px",width:"80%",margin:"0 auto",maxWidth:"1400px"}}>
       <Swiper
-        slidesPerView={6}
+        slidesPerView={5}
         navigation={true}
         spaceBetween={20}
         modules={[Pagination , Navigation]}
         className="mySwiper"
+        breakpoints={{
+          200: {
+            width: 200,
+            slidesPerView: 1,
+          },
+          576: {
+            width: 576,
+            slidesPerView: 2,
+          },
+          768: {
+            width: 768,
+            slidesPerView: 2.5,
+          },
+          992:{
+            width: 992,
+            slidesPerView: 4,
+          },
+          1200:{
+            width: 1200,
+            slidesPerView: 5,
+          },
+          1400:{
+            width: 1400,
+            slidesPerView: 6,
+          }
+        }}        
       >
         <SwiperSlide>
             <Box sx={{height:"auto",overflow:'hidden',textAlign:"center",background:"rgba(0, 0, 0, 0.46)"}}>
