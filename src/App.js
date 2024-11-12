@@ -42,7 +42,6 @@ function App() {
   }
 
   return (
-
     <Box>
       <Box sx={{ background: "white", textAlign: "center", padding: "10px" }}>
         <h1 style={{ color: "#20B2AA", fontWeight: "500", fontSize: "35px" }}>Парламент 2024</h1>
