@@ -1,6 +1,25 @@
 import { Box } from "@mui/material";
+import Counter from "../ui/CounterAnimate";
+import { useEffect, useState } from "react";
+import { fetchData } from "../services/requests";
 
-function InfoBlog({ data }) {
+function InfoBlog() {
+    const [data , setData] = useState([])
+
+    const loadData = async() => {
+        try {
+            const result = await fetchData("api/cities")
+            console.log("res=",result)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        loadData()
+    },[])
+
+
     return (
         <Box sx={{ margin: "10px" }}>
             <Box sx={{ background: "white", color: "var(--main)", padding: "10px" }}>
@@ -9,11 +28,11 @@ function InfoBlog({ data }) {
             <Box sx={{display:"flex",flexDirection:"column",gap:"10px",padding:"0 10px"}}>
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "white", marginTop: "10px" }}>
                     <p>Атажурт</p>
-                    <p>100%</p>
+                    <Counter targetNumber={100} parametrs={"%"}/>
                 </Box>
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "white", marginTop: "10px" }}>
                     <p>Атажурт</p>
-                    <p>100%</p>
+                    <Counter targetNumber={100} parametrs={"%"}/>
                 </Box>
             </Box>
         </Box>
