@@ -40,7 +40,7 @@ const MapWithCities = ({ setData }) => {
     ]
 
     return (
-        <Box sx={{ width: "100%", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <Box sx={{ width: "100%", height: "auto", display: "flex", justifyContent: "center", alignItems: "center" }}>
             <svg
                 xmlnsMapsvg="http://mapsvg.com"
                 xmlnsDc="http://purl.org/dc/elements/1.1/"
@@ -55,7 +55,7 @@ const MapWithCities = ({ setData }) => {
                         key={path.id}
                         d={path.d}
                         style={{
-                            stroke: '#66CDAA',
+                            stroke: 'var(--main)',
                             fill: clickedIndex === index
                                 ? '#A9A9A9'
                                 : hoveredIndex === index
