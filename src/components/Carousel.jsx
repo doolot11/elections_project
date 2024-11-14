@@ -13,10 +13,11 @@ import 'swiper/css/navigation';
 // import required modules
 import { Pagination , Navigation} from 'swiper/modules';
 import Counter from '../ui/CounterAnimate';
+import styled from '@emotion/styled';
 
 export default function Carousel() {
   return (
-    <Box sx={{padding:"30px 50px",width:"80%",margin:"0 auto",maxWidth:"1400px"}}>
+    <Continer>
       <Swiper
         slidesPerView={5}
         navigation={true}
@@ -26,7 +27,7 @@ export default function Carousel() {
         breakpoints={{
           200: {
             width: 200,
-            slidesPerView: 1,
+            slidesPerView: 0.8,
           },
           576: {
             width: 576,
@@ -93,6 +94,17 @@ export default function Carousel() {
        
         
       </Swiper>
-    </Box>
+    </Continer>
   );
 }
+
+const Continer = styled(Box)`
+  padding:30px 50px;
+  width:80%;
+  margin:0 auto;
+  max-width:1400;
+
+  @media screen and (max-width:767px) {
+    width:90%;
+  }
+`
