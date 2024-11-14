@@ -48,8 +48,10 @@ const MapWithCities = ({ setData }) => {
                 xmlnsSvg="http://www.w3.org/2000/svg"
                 xmlns="http://www.w3.org/2000/svg"
                 mapsvgGeoViewBox="69.259411 43.256543 80.288715 39.169714"
-                width="792.38214"
-                height="389.39474">
+                width="100%"
+                height="auto"
+                viewBox="0 0 820 500"
+            >
                 {pathCities.map((path, index) => (
                     <path
                         key={path.id}

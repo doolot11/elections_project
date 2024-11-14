@@ -1,11 +1,12 @@
 import { Box, Tab, Tabs } from "@mui/material";
 import MapTest from "./components/MapTest";
 import InfoBlog from "./components/InfoBlog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Carousel from "./components/Carousel";
 import MapWithCities from "./components/MapWithCities";
 import logoIcon from "./images/png/logo.png"
 import styled from "@emotion/styled";
+import { fetchData } from "./services/requests";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -35,20 +36,46 @@ function a11yProps(index) {
 }
 
 function App() {
-  const [data, setData] = useState()
-  const [value, setValue] = useState(0);
-  console.log("main data=", data);
+  const [data, setData] = useState({
+    cities: [],
+    parties: [],
+  })
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const getCities = async () => {
+    try {
+      const result = await fetchData("api/1")
+      console.log("cities=", result)
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  return (
+  const getParties = async() => {
+    try {
+        const result = await fetchData("api/2")
+        console.log("parties=",result)
+    } catch (error) {
+        console.log(error);
+    }
+  }
 
-    <Box sx={{display:"flex",flexDirection:"column",gap:"auto"}}>
+  
+  useEffect(()=>{
+    getCities()
+    getParties()
+  },[])
+
+
+
+  // dont touch )
+  const [value, setValue] = useState(0);
+  const handleChange = (event, newValue) => { setValue(newValue); }
+
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: "auto" }}>
       <Box sx={{ background: "white", textAlign: "center", padding: "0" }}>
         {/* <h1 style={{ color: "var(--main)", fontWeight: "500", fontSize: "35px" }}>Парламент 2024</h1> */}
-        <img style={{height:"130px"}} src={logoIcon} alt="Логотип"/>
+        <img style={{ height: "130px" }} src={logoIcon} alt="Логотип" />
       </Box>
       <Box>
         <Carousel />
@@ -99,6 +126,11 @@ const ContinerBlog = styled(Box)`
   }
 
   @media screen and (max-width:992px) {
+    grid-template-columns: 70% 20%;
+  }
+
+  @media screen and (max-width:767px) {
     grid-template-columns: 1fr;
+    width:90%;
   }
 `

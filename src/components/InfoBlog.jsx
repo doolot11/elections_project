@@ -3,23 +3,7 @@ import Counter from "../ui/CounterAnimate";
 import { useEffect, useState } from "react";
 import { fetchData } from "../services/requests";
 
-function InfoBlog() {
-    const [data , setData] = useState([])
-
-    const loadData = async() => {
-        try {
-            const result = await fetchData("api/cities")
-            console.log("res=",result)
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    useEffect(() => {
-        loadData()
-    },[])
-
-
+function InfoBlog({data}) {
     return (
         <Box sx={{ margin: "10px" }}>
             <Box sx={{ background: "white", color: "var(--main)", padding: "10px" }}>

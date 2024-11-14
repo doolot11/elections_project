@@ -19,3 +19,10 @@ body {
   background: var(--main)	;
   font-family: "Roboto", sans-serif;
 }
+
+
+@media screen and (max-width:576px) {
+  .css-1wxkzlj-MuiTabs-flexContainer {
+    flex-direction: column;
+  }
+}
