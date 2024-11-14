@@ -1,7 +1,8 @@
 
 
 export const fetchData = async (url, headers = {}) => {
-    const base_url = `https://ba-election-project.onrender.com/${url}`
+    // const base_url = `https://ba-election-project.onrender.com/${url}`
+    const base_url = `https://fakestoreapi.com/products/${url}`
 
     try {
         const response = await fetch(base_url, {
