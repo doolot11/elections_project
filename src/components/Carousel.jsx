@@ -8,8 +8,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-
-
 // import required modules
 import { Pagination , Navigation} from 'swiper/modules';
 import Counter from '../ui/CounterAnimate';

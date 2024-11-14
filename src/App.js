@@ -122,11 +122,11 @@ const ContinerBlog = styled(Box)`
 
 
   @media screen and (max-width:1200px) {
-    grid-template-columns: 70% 20%;
+    grid-template-columns: 70% 30%;
   }
 
   @media screen and (max-width:992px) {
-    grid-template-columns: 70% 20%;
+    grid-template-columns: 70% 30%;
   }
 
   @media screen and (max-width:767px) {
