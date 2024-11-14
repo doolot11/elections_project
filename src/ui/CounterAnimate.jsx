@@ -20,13 +20,13 @@ const Counter = ({ targetNumber, parametrs }) => {
                 }
                 return prevCount + increment;
             });
-        }, 10);
+        }, 5);
 
         return () => clearInterval(interval);
     }, [targetNumber]);
 
     return (
-        <p style={{display:"flex",alignItems:"center",gap:"5px",justifyContent:"center"}}>
+        <p style={{display:"flex",alignItems:"center",gap:"5px",justifyContent:"center",fontSize:"13px"}}>
             {Math.floor(count)}
             <span>{parametrs}</span>
         </p>
