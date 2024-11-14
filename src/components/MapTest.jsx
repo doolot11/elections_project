@@ -57,7 +57,7 @@ const MapTest = ({ setData }) => {
                   ? '#D3D3D3'
                   : 'white',
               strokeWidth: 2,
-              transition: 'all 0.8s ease',
+              transition: 'all 0.5s ease',
               cursor: 'pointer',
             }}
             onMouseEnter={() => setHoveredIndex(index)}

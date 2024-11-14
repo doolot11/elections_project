@@ -8,37 +8,12 @@ import logoIcon from "./images/png/logo.png"
 import styled from "@emotion/styled";
 import { fetchData } from "./services/requests";
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box>
-          {children}
-        </Box>
-      )}
-    </div>
-  );
-}
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
 function App() {
   const [data, setData] = useState({
     cities: [],
     parties: [],
+    infoCity:{},
+    infoRegion:{}
   })
 
   const getCities = async () => {
@@ -58,11 +33,10 @@ function App() {
         console.log(error);
     }
   }
-
   
   useEffect(()=>{
-    getCities()
-    getParties()
+    // getCities()
+    // getParties()
   },[])
 
 
@@ -71,6 +45,44 @@ function App() {
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => { setValue(newValue); }
 
+
+  // tabs logic
+  const [tab,setTab] = useState("region")
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+    
+    if(value === 0){
+      setTab("region")
+    }else {
+      setTab("city")
+    }
+
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box>
+            {children}
+          </Box>
+        )}
+      </div>
+    );
+  }
+  
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
+
+  
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "auto" }}>
       <Box sx={{ background: "white", textAlign: "center", padding: "0" }}>
@@ -78,7 +90,7 @@ function App() {
         <img style={{ height: "130px" }} src={logoIcon} alt="Логотип" />
       </Box>
       <Box>
-        <Carousel />
+        <Carousel data={data} tabStatus={tab} />
       </Box>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Tabs
@@ -103,7 +115,7 @@ function App() {
         <TabPanel value={value} index={1}>
           <MapWithCities setData={setData} />
         </TabPanel>
-        <InfoBlog data={data} />
+        <InfoBlog tabStatus={tab} data={data} />
       </ContinerBlog>
     </Box>
   );
