@@ -48,6 +48,7 @@ const MapTest = ({ setData }) => {
           <path
             key={path.id}
             d={path.d}
+            // d={path?.find(i => i.id ===)}
             style={{
               stroke: 'var(--main)',
               fill: clickedIndex === index
