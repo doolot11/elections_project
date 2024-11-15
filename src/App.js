@@ -50,7 +50,22 @@ function App() {
     name: "",
     region_id: null,
   })
-  const handleChange = (event, newValue) => { setValue(newValue); }
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  }
+
+  console.log("изменние табов", value);
+  useEffect(() => {
+    if (value !== 0) {
+      setData({
+        cities: [],
+        parties: [],
+        infoCity: {},
+        infoRegion: {},
+      });
+      console.log("Данные очищены");
+    }
+  }, [value, setData]);
 
 
   // tabs logic
@@ -146,7 +161,7 @@ const WrapperCities = styled(Box)`
   width: 100%;
   display:grid;
   gap:2%;
-  grid-template-columns:70% 25%;
+  grid-template-columns:70% 28%;
   align-items: start;
 
 
