@@ -159,7 +159,7 @@ const WrapperCities = styled(Box)`
 
 const ContinerBlog = styled(Box)`
   display:grid;
-  grid-template-columns: 100%;
+  grid-template-columns: 80%;
   align-items:center;
   justify-content: center;
   width: 80%;
