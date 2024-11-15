@@ -21,6 +21,10 @@ body {
 
 }
 
+/* .css-1qltlow-MuiTabs-indicator {
+  display: none !important;
+} */
+
 
 @media screen and (max-width:576px) {
   .css-1wxkzlj-MuiTabs-flexContainer {

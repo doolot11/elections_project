@@ -7,6 +7,7 @@ import MapWithCities from "./components/MapWithCities";
 import logoIcon from "./images/png/logo.png"
 import styled from "@emotion/styled";
 import { fetchData } from "./services/requests";
+import Cities from "./components/Cities";
 
 function App() {
   const [data, setData] = useState({
@@ -45,6 +46,10 @@ function App() {
 
   // dont touch )
   const [value, setValue] = useState(0);
+  const [regionTitle, setRegionTitle] = useState({
+    name: "",
+    region_id: null,
+  })
   const handleChange = (event, newValue) => { setValue(newValue); }
 
 
@@ -53,11 +58,11 @@ function App() {
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
-    if (value === 0) {
-      setTab("region")
-    } else {
-      // setTab("city")
-    }
+    // if (value === 0) {
+    //   setTab("region")
+    // } else {
+    //   setTab("city")
+    // }
 
     return (
       <div
@@ -99,7 +104,9 @@ function App() {
         <img style={{ height: "130px" }} src={logoIcon} alt="Логотип" />
       </Box>
       <Box>
-        <Carousel getCitiesWithParty={getCitiesWithParty} data={data} tabStatus={tab} />
+        <TabPanel value={value} index={1}>
+          <Carousel getCitiesWithParty={getCitiesWithParty} data={data} tabStatus={tab} />
+        </TabPanel>
       </Box>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Tabs
@@ -109,22 +116,25 @@ function App() {
           textColor="inherit"
           TabIndicatorProps={{
             style: {
-              backgroundColor: "white", // цвет линии под активным табом
+              backgroundColor: "white",
             },
           }}
         >
           <Tab value={0} {...a11yProps(0)} sx={{ "&.Mui-selected": { color: "white" } }} label="ЕДИНЫЙ ОКРУГ" />
-          < Tab value={1} {...a11yProps(1)} sx={{ "&.Mui-selected": { color: "white" } }} label="ОДНОМАНДАТНЫЕ ОКРУГА" />
+          <Tab value={1} {...a11yProps(1)} sx={{ "&.Mui-selected": { color: "white" } }} label={regionTitle?.name} />
         </Tabs>
       </Box>
       <ContinerBlog>
         <TabPanel value={value} index={0}>
-          <MapTest setData={setData} />
+          <MapTest setRegionTitle={setRegionTitle} setValue={setValue} setData={setData} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <MapWithCities setTab={setTab} setData={setData} />
+          {/* <MapWithCities setTab={setTab} setData={setData} /> */}
+          <WrapperCities>
+            <Cities setTab={setTab} setData={setData} regionTitle={regionTitle} />
+            <InfoBlog setTab={setTab} setData={setData} votesOfCities={votesOfCities} tabStatus={tab} data={data} />
+          </WrapperCities>
         </TabPanel>
-        <InfoBlog votesOfCities={votesOfCities} tabStatus={tab} data={data} />
       </ContinerBlog>
     </Box>
   );
@@ -132,11 +142,34 @@ function App() {
 
 export default App;
 
+const WrapperCities = styled(Box)`
+  width: 100%;
+  display:grid;
+  gap:2%;
+  grid-template-columns:70% 25%;
+  align-items: start;
+
+
+  @media screen and (max-width:1200px) {
+    grid-template-columns: 70% 30%;
+  }
+
+  @media screen and (max-width:992px) {
+    grid-template-columns: 70% 30%;
+  }
+
+  @media screen and (max-width:767px) {
+    grid-template-columns: 1fr;
+    width:90%;
+  }
+
+`
 
 const ContinerBlog = styled(Box)`
   display:grid;
-  grid-template-columns: 80% 20%;
-  align-items:start;
+  grid-template-columns: 80%;
+  align-items:center;
+  justify-content: center;
   width: 80%;
   margin:50px auto;
   max-width:1400px;
