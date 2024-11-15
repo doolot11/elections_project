@@ -60,6 +60,7 @@ function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab }) {
             </ModalWindow>
             <Box sx={{ background: "white", padding: "5px", borderRadius: "5px" }}>
                 <ContainerTitle sx={{ background: "white", color: "var(--main)", padding: "10px" }}>
+                    <p>Статистика</p>
                     {/* <h2 style={{ fontWeight: "300", fontSize: "20px" }}>
                         {data?.infoCity?.name}
                         {
@@ -138,7 +139,7 @@ function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab }) {
                                 {
                                     data?.cities?.map(i => (
                                         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
-                                            <p style={{ fontSize: "13px" }}>{i?.name} 12</p>
+                                            <p style={{ fontSize: "13px" }}>{i?.name}</p>
                                             <Counter targetNumber={i?.percent} parametrs={"%"} />
                                         </Box>
                                     ))
@@ -186,10 +187,20 @@ function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab }) {
 
 export default InfoBlog;
 
-const NewDesktop = styled(Box)``
+const NewDesktop = styled(Box)`
+
+    @media screen and (max-width:767px ) {
+        display:none;
+    }
+`
 
 
-const NewMobile = styled(Box)``
+const NewMobile = styled(Box)`
+    display: none;
+    @media screen and (max-width:767px ) {
+        display:block;
+    }
+`
 
 
 // old
