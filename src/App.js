@@ -8,6 +8,9 @@ import logoIcon from "./images/png/logo.png"
 import styled from "@emotion/styled";
 import { fetchData } from "./services/requests";
 import Cities from "./components/Cities";
+import SneckBar from "./ui/SneckBar";
+import SneckCity from "./ui/SneckCity";
+
 
 function App() {
   const [data, setData] = useState({
@@ -94,6 +97,10 @@ function App() {
 
   }
   return (
+  <>
+   {
+        value === 0 ? <SneckBar text={"Нажмите по региону для подробной информации"}/> : <SneckCity text={"Выберите город для подробной информации"}/>
+      }
     <Box sx={{ display: "flex", flexDirection: "column", gap: "auto" }}>
       <Box sx={{ background: "white", textAlign: "center", padding: "0" }}>
         {/* <h1 style={{ color: "var(--main)", fontWeight: "500", fontSize: "35px" }}>Парламент 2024</h1> */}
@@ -133,6 +140,7 @@ function App() {
         </TabPanel>
       </ContinerBlog>
     </Box>
+    </>
   );
 }
 
