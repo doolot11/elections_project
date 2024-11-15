@@ -4,11 +4,13 @@ import cities from "../data/cities.json"
 import { fetchData } from "../services/requests";
 import {ReactComponent as CityIcon} from "../images/svg/city.svg"
 
-function Cities({ regionTitle ,setData,setTab,setStatisticParam }) {
+function Cities({ regionTitle ,setData,setTab,setStatisticParam ,isLoadingParties}) {
 
   const getCities = async (id) => {
     // setTab("city")
+    isLoadingParties(true)
     try {
+      
       const result = await fetchData(`get-parties/?city=${id}`)
       console.log("cities podrobno=", result)
       setData((prevData) => ({
@@ -16,6 +18,7 @@ function Cities({ regionTitle ,setData,setTab,setStatisticParam }) {
         cities: result,
         // infoCity: info,
       }));
+      isLoadingParties(false)
     } catch (error) {
       console.log(error);
     }
