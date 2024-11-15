@@ -6,9 +6,10 @@ import styled from "@emotion/styled";
 import SelectCustom from "../ui/SelectCustom";
 import ModalWindow from "../ui/ModalWindow";
 import cities from "../data/cities.json"
+import { ReactComponent as MoreIcon } from "../images/svg/more.svg"
 
-function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setTab }) {
-    console.log("data in infoBlock", data, tabStatus);
+
+function InfoBlog({loadingCities, data, votesOfCities, tabStatus, setData, setTab, statisticParam }) {
 
     const [modal, setModal] = useState(false)
     const [modalParty, setModalParty] = useState(false)
@@ -18,8 +19,8 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
 
     return (
         <>
-            <ModalWindow open={modal} handleClose={handleCloseModal} width="400px">
-                <Typography sx={{ fontSize: "18px", fontWeight: "700", borderBottom: "1px solid black" }}>Подробная информация</Typography>
+            <ModalWindow open={modal} handleClose={handleCloseModal} width="450px">
+                <Typography sx={{ fontSize: "18px", fontWeight: "400", borderBottom: "1px solid black" }}>Подробная информация</Typography>
                 {
                     tabStatus === "region" ? (<>
                         {/* {
@@ -35,7 +36,7 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
                         (<>
                             {
                                 data?.cities?.map(i => (
-                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
                                         <p style={{ fontSize: "13px" }}>{i?.name}</p>
                                         <Counter targetNumber={i?.percent} parametrs={"%"} />
                                     </Box>
@@ -44,12 +45,11 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
                         </>)
                 }
             </ModalWindow>
-            <ModalWindow open={modalParty} handleClose={() => setModalParty(false)} width="400px">
-                <Typography sx={{ fontSize: "18px", fontWeight: "700", borderBottom: "1px solid black" }}>Подробная информация</Typography>
-
-                {
+            <ModalWindow open={modalParty} handleClose={() => setModalParty(false)} width="450px">
+            <Typography sx={{ fontSize: "18px", fontWeight: "400", borderBottom: "1px solid black" }}>Подробная информация</Typography>
+            {
                     votesOfCities?.map(i => (
-                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px", gap:"15px" }}>
                             <p style={{ fontSize: "13px" }}>{cities.find((city) => city.slug === i.city_slug)?.name
                             }</p>
                             <Counter targetNumber={i?.percent} parametrs={"%"} />
@@ -58,9 +58,9 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
                 }
 
             </ModalWindow>
-            <Box sx={{ background: "white", padding: "5px", borderRadius: "5px" }}>
+            <Adaptive sx={{ background: "white", padding: "5px", borderRadius: "5px" }}>
                 <ContainerTitle sx={{ background: "white", color: "var(--main)", padding: "10px" }}>
-                    <p style={{ fontFamily: "gotham" }}>Статистика</p>
+                    <p>Статистика  {statisticParam ? `- ${statisticParam}` : ""}</p>
                     {/* <h2 style={{ fontWeight: "300", fontSize: "20px" }}>
                         {data?.infoCity?.name}
                         {
@@ -128,7 +128,7 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
                         tabStatus === "region" ? (<>
                             {
                                 votesOfCities?.map(i => (
-                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
                                         <p style={{ fontSize: "13px" }}>{cities.find((city) => city.slug === i.city_slug)?.name
                                         }</p>
                                         <Counter targetNumber={i?.percent} parametrs={"%"} />
@@ -139,7 +139,7 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
                             (<>
                                 {
                                     data?.cities?.map(i => (
-                                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
                                             <p style={{ fontSize: "13px" }}>{i?.name}</p>
                                             <Counter targetNumber={i?.percent} parametrs={"%"} />
                                         </Box>
@@ -154,7 +154,7 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
                         tabStatus === "region" ? (<>
                             {
                                 votesOfCities?.map(i => (
-                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
                                         <p style={{ fontSize: "13px" }}>{cities.find((city) => city.slug === i.city_slug)?.name
                                         }</p>
                                         <Counter targetNumber={i?.percent} parametrs={"%"} />
@@ -165,7 +165,7 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
                             (<>
                                 {
                                     data?.cities?.map(i => (
-                                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
                                             <p style={{ fontSize: "13px" }}>{i?.name} 12</p>
                                             <Counter targetNumber={i?.percent} parametrs={"%"} />
                                         </Box>
@@ -176,20 +176,53 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
                 </NewMobile>
 
                 {
-                    (data?.cities?.length && tabStatus === "city") ? <p onClick={() => handleOpenModal()} style={{ fontSize: "13px", textTransform: "uppercase", cursor: "pointer", marginTop: "30px" }}>Посмотреть подробнее...</p> : <></>
+                    (data?.cities?.length && tabStatus === "city") ?
+                        <More>
+                            <MoreIcon />
+                            <p onClick={() => handleOpenModal()} style={{ fontSize: "13.5px", textTransform: "", cursor: "pointer" }}>Посмотреть подробнее...</p>
+                        </More> : <></>
                 }
                 {
-                    (data?.cities?.length && tabStatus === "region") ? <p onClick={() => setModalParty(true)} style={{ fontSize: "13px", textTransform: "uppercase", cursor: "pointer", marginTop: "30px" }}>Посмотреть подробнее...</p> : <></>
+
+                    (data?.cities?.length && tabStatus === "region") ?
+                        <More>
+                            <MoreIcon />
+                            <p onClick={() => setModalParty(true)} style={{ fontSize: "13.5px", textTransform: "", cursor: "pointer" }}>Посмотреть подробнее...</p>
+                        </More> : <></>
                 }
-            </Box>
+            </Adaptive>
         </>
     );
 }
 
 export default InfoBlog;
 
-const NewDesktop = styled(Box)`
+const Adaptive = styled(Box)`
+    @media screen and (max-width:767px) {
+    margin-top:20px;
+  }
+`
 
+const More = styled('div')`
+    margin-top:30px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+
+    & svg {
+        width:20px;
+        height:20px;
+    }
+
+    &:hover {
+        & p {
+            color:var(--main)
+        }
+    }
+`
+
+const NewDesktop = styled(Box)`
+    padding: 0 5px;
     @media screen and (max-width:767px ) {
         display:none;
     }
@@ -197,6 +230,7 @@ const NewDesktop = styled(Box)`
 
 
 const NewMobile = styled(Box)`
+    padding: 0 5px;
     display: none;
     @media screen and (max-width:767px ) {
         display:block;
