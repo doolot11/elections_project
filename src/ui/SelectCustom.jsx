@@ -3,10 +3,29 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import cities from "../data/cities.json"
+import { fetchData } from '../services/requests';
 
-export default function SelectCustom({ title, data, tabStatus }) {
+
+export default function SelectCustom({ title, data, tabStatus ,setData,setTab}) {
     const [age, setAge] = React.useState('');
 
+    const getCities = async (id,info) => {
+        console.log("id", id);
+        try {
+            const result = await fetchData(`get-parties/?city=${id}`)
+            console.log("cities podrobno=", result)
+            setData((prevData) => ({
+                ...prevData,
+                cities: result,
+                infoCity:info,
+            }));
+            setTab("city")
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
     const handleChange = (event) => {
         setAge(event.target.value);
         if (tabStatus === "region" || age?.length) {
@@ -14,9 +33,12 @@ export default function SelectCustom({ title, data, tabStatus }) {
         } else {
             console.log("city");
         }
-    };
 
+        console.log("select data",age);
+        getCities(age)
+    };
     console.log("age", age);
+    
 
     // Define options as an array depending on tabStatus
     const options = tabStatus === "region" 
@@ -36,7 +58,8 @@ export default function SelectCustom({ title, data, tabStatus }) {
     return (
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
             <InputLabel id="demo-select-small-label">
-                {tabStatus === "region" ? "Выберите область" : "Выберите город"}
+                {/* {tabStatus === "region" ? "Выберите область" : "Выберите город"} */}
+                Выберите город
             </InputLabel>
             <Select
                 labelId="demo-select-small-label"
@@ -45,9 +68,9 @@ export default function SelectCustom({ title, data, tabStatus }) {
                 label="Age"
                 onChange={handleChange}
             >
-                {options.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                        {option.label}
+                {cities?.map((option) => (
+                    <MenuItem key={option.name} value={option.slug}>
+                        {option.name}
                     </MenuItem>
                 ))}
             </Select>
