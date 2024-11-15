@@ -80,13 +80,19 @@ function App() {
       'aria-controls': `simple-tabpanel-${index}`,
     };
   }
-
+  const [loadingCities, isLoadingCities] = useState(false)
   async function getCitiesWithParty(e) {
+    isLoadingCities(true)
     const result = await fetchData(`cities/?party=${e.party_slug}`)
     setTab("region")
     setVotesOfCities(result)
+    isLoadingCities(false)
   }
+  const [statusParties, setStatusParties] = useState(false)
+  function isLoadingParties(e) {
+    setStatusParties(e)
 
+  }
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "auto" }}>
       <Box sx={{ background: "white", textAlign: "center", padding: "0" }}>
@@ -95,7 +101,7 @@ function App() {
       </Box>
       <Box>
         <TabPanel value={value} index={1}>
-          <Carousel setStatisticParam={setStatisticParam} getCitiesWithParty={getCitiesWithParty} data={data} tabStatus={tab} />
+          <Carousel statusParties={statusParties} setStatisticParam={setStatisticParam} getCitiesWithParty={getCitiesWithParty} data={data} tabStatus={tab} />
         </TabPanel>
       </Box>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -110,8 +116,8 @@ function App() {
             },
           }}
         >
-          <Tab value={0} {...a11yProps(0)} sx={{ "&.Mui-selected": { color: "white" } }} label="ЕДИНЫЙ ОКРУГ" />
-          {value !== 0 && <Tab value={1} {...a11yProps(1)} sx={{ "&.Mui-selected": { color: "white" } }} label={value === 0 ? "" : regionTitle?.name} /> }
+          <Tab value={0} {...a11yProps(0)} sx={{ "&.Mui-selected": { color: "white" }, fontFamily: "gotham" }} label="ЕДИНЫЙ ОКРУГ" />
+          {value !== 0 && <Tab value={1} {...a11yProps(1)} sx={{ "&.Mui-selected": { color: "white" }, fontFamily: "gotham" }} label={value === 0 ? "" : regionTitle?.name} /> }
         </Tabs>
       </Box>
       <ContinerBlog>
@@ -121,8 +127,8 @@ function App() {
         <TabPanel value={value} index={1}>
           {/* <MapWithCities setTab={setTab} setData={setData} /> */}
           <WrapperCities>
-            <Cities setStatisticParam={setStatisticParam} setTab={setTab} setData={setData} regionTitle={regionTitle} />
-            <InfoBlog statisticParam={statisticParam} setTab={setTab} setData={setData} votesOfCities={votesOfCities} tabStatus={tab} data={data} />
+            <Cities isLoadingParties={isLoadingParties} setStatisticParam={setStatisticParam} setTab={setTab} setData={setData} regionTitle={regionTitle} />
+            <InfoBlog loadingCities={loadingCities} statisticParam={statisticParam} setTab={setTab} setData={setData} votesOfCities={votesOfCities} tabStatus={tab} data={data} />
           </WrapperCities>
         </TabPanel>
       </ContinerBlog>

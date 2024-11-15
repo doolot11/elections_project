@@ -1,4 +1,4 @@
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, Modal, Skeleton, Typography } from "@mui/material";
 import Counter from "../ui/CounterAnimate";
 import { useEffect, useState } from "react";
 import { fetchData } from "../services/requests";
@@ -9,7 +9,7 @@ import cities from "../data/cities.json"
 import { ReactComponent as MoreIcon } from "../images/svg/more.svg"
 
 
-function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab, statisticParam }) {
+function InfoBlog({loadingCities, data, votesOfCities, tabStatus, setData, setTab, statisticParam }) {
 
     const [modal, setModal] = useState(false)
     const [modalParty, setModalParty] = useState(false)
@@ -70,6 +70,7 @@ function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab, statisticPa
                     <div>
                         <SelectCustom setData={setData} setTab={setTab} data={data?.cities} tabStatus={tabStatus} title={"Выберите город"} />
                     </div> */}
+                    
                 </ContainerTitle>
                 {/* <Desktop sx={{display: "flex", flexDirection: "column", gap: "2px", padding: "0 10px", height: "100%", width:"100%", overflowY: "scroll", maxHeight: "400px", overflowY: "scroll" , borderRadius:"5px" }}>
                     {

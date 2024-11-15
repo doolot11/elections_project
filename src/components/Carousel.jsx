@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Skeleton } from '@mui/material';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -13,7 +13,7 @@ import { Pagination, Navigation } from 'swiper/modules';
 import Counter from '../ui/CounterAnimate';
 import styled from '@emotion/styled';
 
-export default function Carousel({ data, tabStatus, getCitiesWithParty , setStatisticParam }) {
+export default function Carousel({statusParties, data, tabStatus, getCitiesWithParty , setStatisticParam }) {
   return (
     <Continer>
       <Swiper
@@ -49,6 +49,13 @@ export default function Carousel({ data, tabStatus, getCitiesWithParty , setStat
           }
         }}
       >
+        {statusParties && <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          {
+            [...Array(5)].map((_, index) => (
+              <Skeleton key={"skeleton" + index} sx={{ width: "200px", height: "160px" }} variant='rectangular'></Skeleton>
+            ))
+          }
+        </Box>}
         {
           // tabStatus === "region" ? (<></>) :
             (<>
@@ -68,10 +75,15 @@ export default function Carousel({ data, tabStatus, getCitiesWithParty , setStat
                         </p>
                       </Box>
                     </Box>
-                  </SwiperSlide>
-                ))
-              }
-            </>)
+                    {/* <Box sx={{ padding: "5px 0", textAlign: "center" }}>
+                      <p style={{ color: "white", fontSize: "25px", fontWeight: "700", textAlign: "center" }}>
+                        <Counter targetNumber={i?.percent} parametrs={"%"} />
+                      </p>
+                    </Box> */}
+                </SwiperSlide>
+              ))
+            }
+          </>)
         }
 
 
