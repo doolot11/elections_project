@@ -8,6 +8,8 @@ import logoIcon from "./images/png/logo.png"
 import styled from "@emotion/styled";
 import { fetchData } from "./services/requests";
 import Cities from "./components/Cities";
+import SneckBar from "./ui/SneckBar";
+import SneckCity from "./ui/SneckCity";
 
 function App() {
   const [data, setData] = useState({
@@ -18,7 +20,7 @@ function App() {
   })
 
   const [votesOfCities, setVotesOfCities] = useState([])
-  const [statisticParam,setStatisticParam] = useState("")
+  const [statisticParam, setStatisticParam] = useState("")
 
 
   // dont touch )
@@ -88,45 +90,50 @@ function App() {
   }
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: "auto" }}>
-      <Box sx={{ background: "white", textAlign: "center", padding: "0" }}>
-        {/* <h1 style={{ color: "var(--main)", fontWeight: "500", fontSize: "35px" }}>Парламент 2024</h1> */}
-        <img style={{ height: "130px" }} src={logoIcon} alt="Логотип" />
+    <>
+      {
+        value === 0 ? <SneckBar text={"Нажмите по региону для подробной информации"}/> : <SneckCity text={"Выберите город для подробной информации"}/>
+      }
+      <Box sx={{ display: "flex", flexDirection: "column", gap: "auto" }}>
+        <Box sx={{ background: "white", textAlign: "center", padding: "0" }}>
+          {/* <h1 style={{ color: "var(--main)", fontWeight: "500", fontSize: "35px" }}>Парламент 2024</h1> */}
+          <img style={{ height: "130px" }} src={logoIcon} alt="Логотип" />
+        </Box>
+        <Box>
+          <TabPanel value={value} index={1}>
+            <Carousel setStatisticParam={setStatisticParam} getCitiesWithParty={getCitiesWithParty} data={data} tabStatus={tab} />
+          </TabPanel>
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Tabs
+            value={value}
+            variant="scrollable"
+            onChange={handleChange}
+            textColor="inherit"
+            TabIndicatorProps={{
+              style: {
+                backgroundColor: "white",
+              },
+            }}
+          >
+            <Tab value={0} {...a11yProps(0)} sx={{ "&.Mui-selected": { color: "white" } }} label="ЕДИНЫЙ ОКРУГ" />
+            {value !== 0 && <Tab value={1} {...a11yProps(1)} sx={{ "&.Mui-selected": { color: "white" } }} label={value === 0 ? "" : regionTitle?.name} />}
+          </Tabs>
+        </Box>
+        <ContinerBlog>
+          <TabPanel value={value} index={0}>
+            <MapTest setRegionTitle={setRegionTitle} setValue={setValue} setData={setData} />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            {/* <MapWithCities setTab={setTab} setData={setData} /> */}
+            <WrapperCities>
+              <Cities setStatisticParam={setStatisticParam} setTab={setTab} setData={setData} regionTitle={regionTitle} />
+              <InfoBlog statisticParam={statisticParam} setTab={setTab} setData={setData} votesOfCities={votesOfCities} tabStatus={tab} data={data} />
+            </WrapperCities>
+          </TabPanel>
+        </ContinerBlog>
       </Box>
-      <Box>
-        <TabPanel value={value} index={1}>
-          <Carousel setStatisticParam={setStatisticParam} getCitiesWithParty={getCitiesWithParty} data={data} tabStatus={tab} />
-        </TabPanel>
-      </Box>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Tabs
-          value={value}
-          variant="scrollable"
-          onChange={handleChange}
-          textColor="inherit"
-          TabIndicatorProps={{
-            style: {
-              backgroundColor: "white",
-            },
-          }}
-        >
-          <Tab value={0} {...a11yProps(0)} sx={{ "&.Mui-selected": { color: "white" } }} label="ЕДИНЫЙ ОКРУГ" />
-          {value !== 0 && <Tab value={1} {...a11yProps(1)} sx={{ "&.Mui-selected": { color: "white" } }} label={value === 0 ? "" : regionTitle?.name} /> }
-        </Tabs>
-      </Box>
-      <ContinerBlog>
-        <TabPanel value={value} index={0}>
-          <MapTest setRegionTitle={setRegionTitle} setValue={setValue} setData={setData} />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          {/* <MapWithCities setTab={setTab} setData={setData} /> */}
-          <WrapperCities>
-            <Cities setStatisticParam={setStatisticParam} setTab={setTab} setData={setData} regionTitle={regionTitle} />
-            <InfoBlog statisticParam={statisticParam} setTab={setTab} setData={setData} votesOfCities={votesOfCities} tabStatus={tab} data={data} />
-          </WrapperCities>
-        </TabPanel>
-      </ContinerBlog>
-    </Box>
+    </>
   );
 }
 
