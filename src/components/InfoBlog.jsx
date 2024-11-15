@@ -10,7 +10,6 @@ import { ReactComponent as MoreIcon } from "../images/svg/more.svg"
 
 
 function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab, statisticParam }) {
-    console.log("data in infoBlock", data, tabStatus);
 
     const [modal, setModal] = useState(false)
     const [modalParty, setModalParty] = useState(false)
@@ -20,8 +19,8 @@ function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab, statisticPa
 
     return (
         <>
-            <ModalWindow open={modal} handleClose={handleCloseModal} width="400px">
-                <Typography sx={{ fontSize: "18px", fontWeight: "700", borderBottom: "1px solid black" }}>Подробная информация</Typography>
+            <ModalWindow open={modal} handleClose={handleCloseModal} width="450px">
+                <Typography sx={{ fontSize: "18px", fontWeight: "400", borderBottom: "1px solid black" }}>Подробная информация</Typography>
                 {
                     tabStatus === "region" ? (<>
                         {/* {
@@ -37,7 +36,7 @@ function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab, statisticPa
                         (<>
                             {
                                 data?.cities?.map(i => (
-                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
                                         <p style={{ fontSize: "13px" }}>{i?.name}</p>
                                         <Counter targetNumber={i?.percent} parametrs={"%"} />
                                     </Box>
@@ -46,11 +45,11 @@ function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab, statisticPa
                         </>)
                 }
             </ModalWindow>
-            <ModalWindow open={modalParty} handleClose={() => setModalParty(false)} width="400px">
-                <Typography sx={{ fontSize: "18px", fontWeight: "700", borderBottom: "1px solid black" }}>Подробная информация</Typography>
-                {
+            <ModalWindow open={modalParty} handleClose={() => setModalParty(false)} width="450px">
+            <Typography sx={{ fontSize: "18px", fontWeight: "400", borderBottom: "1px solid black" }}>Подробная информация</Typography>
+            {
                     votesOfCities?.map(i => (
-                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px", gap:"15px" }}>
                             <p style={{ fontSize: "13px" }}>{cities.find((city) => city.slug === i.city_slug)?.name
                             }</p>
                             <Counter targetNumber={i?.percent} parametrs={"%"} />
@@ -128,7 +127,7 @@ function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab, statisticPa
                         tabStatus === "region" ? (<>
                             {
                                 votesOfCities?.map(i => (
-                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
                                         <p style={{ fontSize: "13px" }}>{cities.find((city) => city.slug === i.city_slug)?.name
                                         }</p>
                                         <Counter targetNumber={i?.percent} parametrs={"%"} />
@@ -139,7 +138,7 @@ function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab, statisticPa
                             (<>
                                 {
                                     data?.cities?.map(i => (
-                                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
                                             <p style={{ fontSize: "13px" }}>{i?.name}</p>
                                             <Counter targetNumber={i?.percent} parametrs={"%"} />
                                         </Box>
@@ -154,7 +153,7 @@ function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab, statisticPa
                         tabStatus === "region" ? (<>
                             {
                                 votesOfCities?.map(i => (
-                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
                                         <p style={{ fontSize: "13px" }}>{cities.find((city) => city.slug === i.city_slug)?.name
                                         }</p>
                                         <Counter targetNumber={i?.percent} parametrs={"%"} />
@@ -165,7 +164,7 @@ function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab, statisticPa
                             (<>
                                 {
                                     data?.cities?.map(i => (
-                                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
                                             <p style={{ fontSize: "13px" }}>{i?.name} 12</p>
                                             <Counter targetNumber={i?.percent} parametrs={"%"} />
                                         </Box>
@@ -222,7 +221,7 @@ const More = styled('div')`
 `
 
 const NewDesktop = styled(Box)`
-
+    padding: 0 5px;
     @media screen and (max-width:767px ) {
         display:none;
     }
@@ -230,6 +229,7 @@ const NewDesktop = styled(Box)`
 
 
 const NewMobile = styled(Box)`
+    padding: 0 5px;
     display: none;
     @media screen and (max-width:767px ) {
         display:block;

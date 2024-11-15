@@ -7,7 +7,6 @@ import {ReactComponent as CityIcon} from "../images/svg/city.svg"
 function Cities({ regionTitle ,setData,setTab,setStatisticParam }) {
 
   const getCities = async (id) => {
-    console.log("id", id);
     // setTab("city")
     try {
       const result = await fetchData(`get-parties/?city=${id}`)

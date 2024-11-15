@@ -43,7 +43,6 @@ const MapWithCities = ({ setData, setTab }) => {
     ]
 
     const getCities = async (id,info) => {
-        console.log("id", id);
         setTab("city")
         try {
             const result = await fetchData(`get-parties/?city=${id}`)

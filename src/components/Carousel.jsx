@@ -14,13 +14,6 @@ import Counter from '../ui/CounterAnimate';
 import styled from '@emotion/styled';
 
 export default function Carousel({ data, tabStatus, getCitiesWithParty , setStatisticParam }) {
-  console.log("data carousel", data);
-  // const [searchParams, setSearchParams] = useSearchParams();
-
-  // function getCitiesWithParty(e){
-  //   console.log(e);
-  // }
-
   return (
     <Continer>
       <Swiper

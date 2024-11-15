@@ -31,7 +31,6 @@ function App() {
     setValue(newValue);
   }
 
-  console.log("изменние табов", value);
   useEffect(() => {
     if (value === 0) {
       setData({
@@ -84,7 +83,6 @@ function App() {
 
   async function getCitiesWithParty(e) {
     const result = await fetchData(`cities/?party=${e.party_slug}`)
-    console.log(result);
     setTab("region")
     setVotesOfCities(result)
   }
