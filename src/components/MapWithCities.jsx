@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import cities from "../data/cities.json"
 import { fetchData } from '../services/requests';
 
-const MapWithCities = ({ setData }) => {
+const MapWithCities = ({ setData, setTab }) => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [clickedIndex, setClickedIndex] = useState(null);
 
@@ -44,8 +44,9 @@ const MapWithCities = ({ setData }) => {
 
     const getCities = async (id,info) => {
         console.log("id", id);
+        setTab("city")
         try {
-            const result = await fetchData(`get-parties/?city_id=${id}`)
+            const result = await fetchData(`get-parties/?city=${id}`)
             console.log("cities podrobno=", result)
             setData((prevData) => ({
                 ...prevData,

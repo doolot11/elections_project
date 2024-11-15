@@ -12,9 +12,11 @@ function App() {
   const [data, setData] = useState({
     cities: [],
     parties: [],
-    infoCity:{},
-    infoRegion:{}
+    infoCity: {},
+    infoRegion: {},
   })
+
+  const [votesOfCities, setVotesOfCities] = useState([])
 
   const getCities = async () => {
     try {
@@ -25,19 +27,19 @@ function App() {
     }
   }
 
-  const getParties = async() => {
+  const getParties = async () => {
     try {
-        const result = await fetchData("api/2")
-        console.log("parties=",result)
+      const result = await fetchData("api/2")
+      console.log("parties=", result)
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   }
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     // getCities()
     // getParties()
-  },[])
+  }, [])
 
 
 
@@ -47,14 +49,14 @@ function App() {
 
 
   // tabs logic
-  const [tab,setTab] = useState("region")
+  const [tab, setTab] = useState("region")
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
-    
-    if(value === 0){
+
+    if (value === 0) {
       setTab("region")
-    }else {
-      setTab("city")
+    } else {
+      // setTab("city")
     }
 
     return (
@@ -73,7 +75,7 @@ function App() {
       </div>
     );
   }
-  
+
   function a11yProps(index) {
     return {
       id: `simple-tab-${index}`,
@@ -81,7 +83,14 @@ function App() {
     };
   }
 
-  
+  async function getCitiesWithParty(e) {
+    const result = await fetchData(`cities/?party=${e.party_slug}`)
+    console.log(result);
+    setTab("region")
+    setVotesOfCities(result)
+  }
+
+
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "auto" }}>
@@ -90,7 +99,7 @@ function App() {
         <img style={{ height: "130px" }} src={logoIcon} alt="Логотип" />
       </Box>
       <Box>
-        <Carousel data={data} tabStatus={tab} />
+        <Carousel getCitiesWithParty={getCitiesWithParty} data={data} tabStatus={tab} />
       </Box>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Tabs
@@ -113,9 +122,9 @@ function App() {
           <MapTest setData={setData} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <MapWithCities setData={setData} />
+          <MapWithCities setTab={setTab} setData={setData} />
         </TabPanel>
-        <InfoBlog tabStatus={tab} data={data} />
+        <InfoBlog votesOfCities={votesOfCities} tabStatus={tab} data={data} />
       </ContinerBlog>
     </Box>
   );

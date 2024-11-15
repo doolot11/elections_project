@@ -5,9 +5,10 @@ import { fetchData } from "../services/requests";
 import styled from "@emotion/styled";
 import SelectCustom from "../ui/SelectCustom";
 import ModalWindow from "../ui/ModalWindow";
+import cities from "../data/cities.json"
 
-function InfoBlog({ data, tabStatus }) {
-    console.log("data in city", data);
+function InfoBlog({ data, votesOfCities, tabStatus }) {
+    console.log("data in city votesOfCities", votesOfCities, tabStatus);
 
     const [modal, setModal] = useState(false)
 
@@ -17,16 +18,26 @@ function InfoBlog({ data, tabStatus }) {
     return (
         <>
             <ModalWindow open={modal} handleClose={handleCloseModal} width="380px">
-            <Typography sx={{fontSize:"18px",fontWeight:"700",borderBottom:"1px solid black"}}>Подробная информация</Typography>
+                <Typography sx={{ fontSize: "18px", fontWeight: "700", borderBottom: "1px solid black" }}>Подробная информация</Typography>
                 {
-                    tabStatus === "region" ? (<></>) :
+                    tabStatus === "region" ? (<>
+                        {/* {
+                            votesOfCities?.map(i => (
+                                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                                    <p style={{ fontSize: "13px" }}>{cities.find((city) => city.slug === i.city_slug)?.name
+                                    }</p>
+                                    <Counter targetNumber={i?.percent} parametrs={"%"} />
+                                </Box>
+                            ))
+                        } */}
+                    </>) :
                         (<>
                             {
                                 data?.cities?.map(i => (
-                                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
-                                            <p style={{ fontSize: "13px" }}>{i?.name}</p>
-                                            <Counter targetNumber={i?.percent} parametrs={"%"} />
-                                        </Box>
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                                        <p style={{ fontSize: "13px" }}>{i?.name}</p>
+                                        <Counter targetNumber={i?.percent} parametrs={"%"} />
+                                    </Box>
                                 ))
                             }
                         </>)
@@ -41,7 +52,17 @@ function InfoBlog({ data, tabStatus }) {
                 </ContainerTitle>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: "2px", padding: "0 10px", height: "100%", overflowY: "scroll", maxHeight: "400px", overflowY: "scroll" }}>
                     {
-                        tabStatus === "region" ? (<></>) :
+                        tabStatus === "region" ? (<>
+                            {
+                                votesOfCities?.map(i => (
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
+                                        <p style={{ fontSize: "13px" }}>{cities.find((city) => city.slug === i.city_slug)?.name
+                                        }</p>
+                                        <Counter targetNumber={i?.percent} parametrs={"%"} />
+                                    </Box>
+                                ))
+                            }
+                        </>) :
                             (<>
                                 {
                                     data?.cities?.map(i => (
