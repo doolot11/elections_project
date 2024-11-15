@@ -143,7 +143,7 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
                     {
                         tabStatus === "region" ? (<>
                             {
-                                votesOfCities?.map(i => (
+                                votesOfCities?.slice(0, 10).map(i => (
                                     <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px", gap: "15px" }}>
                                         <p style={{ fontSize: "13px" }}>{cities.find((city) => city.slug === i.city_slug)?.name
                                         }</p>
@@ -154,7 +154,7 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
                         </>) :
                             (<>
                                 {
-                                    data?.cities?.map(i => (
+                                    data?.cities?.slice(0, 10).map(i => (
                                         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px", gap: "15px" }}>
                                             <p style={{ fontSize: "13px" }}>{i?.name}</p>
                                             <Counter targetNumber={i?.percent} parametrs={"%"} />
@@ -169,7 +169,7 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
                     {
                         tabStatus === "region" ? (<>
                             {
-                                votesOfCities?.map(i => (
+                                votesOfCities?.slice(0, 10).map(i => (
                                     <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px", gap: "15px" }}>
                                         <p style={{ fontSize: "13px" }}>{cities.find((city) => city.slug === i.city_slug)?.name
                                         }</p>
@@ -180,7 +180,7 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
                         </>) :
                             (<>
                                 {
-                                    data?.cities?.map(i => (
+                                    data?.cities?.slice(0, 10).map(i => (
                                         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px", gap: "15px" }}>
                                             <p style={{ fontSize: "13px" }}>{i?.name} 12</p>
                                             <Counter targetNumber={i?.percent} parametrs={"%"} />
