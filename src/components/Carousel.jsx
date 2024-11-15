@@ -13,7 +13,7 @@ import { Pagination, Navigation } from 'swiper/modules';
 import Counter from '../ui/CounterAnimate';
 import styled from '@emotion/styled';
 
-export default function Carousel({ data, tabStatus, getCitiesWithParty }) {
+export default function Carousel({ data, tabStatus, getCitiesWithParty , setStatisticParam }) {
   console.log("data carousel", data);
   // const [searchParams, setSearchParams] = useSearchParams();
 
@@ -61,7 +61,10 @@ export default function Carousel({ data, tabStatus, getCitiesWithParty }) {
             (<>
               {
                 data?.cities?.map(i => (
-                  <SwiperSlide onClick={() => getCitiesWithParty(i)}>
+                  <SwiperSlide onClick={() => {
+                    getCitiesWithParty(i)
+                    setStatisticParam(i?.name)
+                    }}>
                     <Box sx={{ height: "auto", overflow: 'hidden', textAlign: "center", background: "rgba(0, 0, 0, 0.46)", width: "210px" }}>
                       <Box sx={{height: "150px", display: "flex", justifyContent: "center", alignItems: "center", paddiing: "4px"}}>
                         <img style={{  width: "100%" }} src={i?.logo} alt="Логотип партии" />

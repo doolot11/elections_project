@@ -18,30 +18,7 @@ function App() {
   })
 
   const [votesOfCities, setVotesOfCities] = useState([])
-
-  const getCities = async () => {
-    try {
-      const result = await fetchData("api/1")
-      console.log("cities=", result)
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const getParties = async () => {
-    try {
-      const result = await fetchData("api/2")
-      console.log("parties=", result)
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    // getCities()
-    // getParties()
-  }, [])
-
+  const [statisticParam,setStatisticParam] = useState("")
 
 
   // dont touch )
@@ -56,13 +33,15 @@ function App() {
 
   console.log("изменние табов", value);
   useEffect(() => {
-    if (value !== 0) {
+    if (value === 0) {
       setData({
         cities: [],
         parties: [],
         infoCity: {},
         infoRegion: {},
       });
+      setVotesOfCities([])
+      setStatisticParam("")
       console.log("Данные очищены");
     }
   }, [value, setData]);
@@ -110,8 +89,6 @@ function App() {
     setVotesOfCities(result)
   }
 
-
-
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "auto" }}>
       <Box sx={{ background: "white", textAlign: "center", padding: "0" }}>
@@ -120,7 +97,7 @@ function App() {
       </Box>
       <Box>
         <TabPanel value={value} index={1}>
-          <Carousel getCitiesWithParty={getCitiesWithParty} data={data} tabStatus={tab} />
+          <Carousel setStatisticParam={setStatisticParam} getCitiesWithParty={getCitiesWithParty} data={data} tabStatus={tab} />
         </TabPanel>
       </Box>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -136,7 +113,7 @@ function App() {
           }}
         >
           <Tab value={0} {...a11yProps(0)} sx={{ "&.Mui-selected": { color: "white" } }} label="ЕДИНЫЙ ОКРУГ" />
-          <Tab value={1} {...a11yProps(1)} sx={{ "&.Mui-selected": { color: "white" } }} label={regionTitle?.name} />
+          {value !== 0 && <Tab value={1} {...a11yProps(1)} sx={{ "&.Mui-selected": { color: "white" } }} label={value === 0 ? "" : regionTitle?.name} /> }
         </Tabs>
       </Box>
       <ContinerBlog>
@@ -146,8 +123,8 @@ function App() {
         <TabPanel value={value} index={1}>
           {/* <MapWithCities setTab={setTab} setData={setData} /> */}
           <WrapperCities>
-            <Cities setTab={setTab} setData={setData} regionTitle={regionTitle} />
-            <InfoBlog setTab={setTab} setData={setData} votesOfCities={votesOfCities} tabStatus={tab} data={data} />
+            <Cities setStatisticParam={setStatisticParam} setTab={setTab} setData={setData} regionTitle={regionTitle} />
+            <InfoBlog statisticParam={statisticParam} setTab={setTab} setData={setData} votesOfCities={votesOfCities} tabStatus={tab} data={data} />
           </WrapperCities>
         </TabPanel>
       </ContinerBlog>
@@ -161,16 +138,16 @@ const WrapperCities = styled(Box)`
   width: 100%;
   display:grid;
   gap:2%;
-  grid-template-columns:70% 28%;
+  grid-template-columns:65% 33%;
   align-items: start;
-
+  margin: 0 auto;
 
   @media screen and (max-width:1200px) {
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 65% 33%;
   }
 
   @media screen and (max-width:992px) {
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 55% 43%;
   }
 
   @media screen and (max-width:767px) {
@@ -182,7 +159,7 @@ const WrapperCities = styled(Box)`
 
 const ContinerBlog = styled(Box)`
   display:grid;
-  grid-template-columns: 80%;
+  grid-template-columns: 100%;
   align-items:center;
   justify-content: center;
   width: 80%;
@@ -191,15 +168,18 @@ const ContinerBlog = styled(Box)`
 
 
   @media screen and (max-width:1200px) {
-    grid-template-columns: 70% 30%;
+    /* grid-template-columns: 70% 30%; */
+    width: 80%;
   }
 
   @media screen and (max-width:992px) {
-    grid-template-columns: 70% 30%;
+    /* grid-template-columns: 70% 30%; */
+    width: 90%;
+
   }
 
   @media screen and (max-width:767px) {
-    grid-template-columns: 1fr;
-    width:90%;
+    /* grid-template-columns: 1fr; */
+    width:100%;
   }
 `

@@ -6,8 +6,10 @@ import styled from "@emotion/styled";
 import SelectCustom from "../ui/SelectCustom";
 import ModalWindow from "../ui/ModalWindow";
 import cities from "../data/cities.json"
+import { ReactComponent as MoreIcon } from "../images/svg/more.svg"
 
-function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab }) {
+
+function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab, statisticParam }) {
     console.log("data in infoBlock", data, tabStatus);
 
     const [modal, setModal] = useState(false)
@@ -46,7 +48,6 @@ function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab }) {
             </ModalWindow>
             <ModalWindow open={modalParty} handleClose={() => setModalParty(false)} width="400px">
                 <Typography sx={{ fontSize: "18px", fontWeight: "700", borderBottom: "1px solid black" }}>Подробная информация</Typography>
-
                 {
                     votesOfCities?.map(i => (
                         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px" }}>
@@ -58,9 +59,9 @@ function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab }) {
                 }
 
             </ModalWindow>
-            <Box sx={{ background: "white", padding: "5px", borderRadius: "5px" }}>
+            <Adaptive sx={{ background: "white", padding: "5px", borderRadius: "5px" }}>
                 <ContainerTitle sx={{ background: "white", color: "var(--main)", padding: "10px" }}>
-                    <p>Статистика</p>
+                    <p>Статистика  {statisticParam ? `- ${statisticParam}` : ""}</p>
                     {/* <h2 style={{ fontWeight: "300", fontSize: "20px" }}>
                         {data?.infoCity?.name}
                         {
@@ -175,17 +176,50 @@ function InfoBlog({ data, votesOfCities, tabStatus, setData, setTab }) {
                 </NewMobile>
 
                 {
-                    (data?.cities?.length && tabStatus === "city") ? <p onClick={() => handleOpenModal()} style={{ fontSize: "13px", textTransform: "uppercase", cursor: "pointer", marginTop: "30px" }}>Посмотреть подробнее...</p> : <></>
+                    (data?.cities?.length && tabStatus === "city") ?
+                        <More>
+                            <MoreIcon />
+                            <p onClick={() => handleOpenModal()} style={{ fontSize: "13.5px", textTransform: "", cursor: "pointer" }}>Посмотреть подробнее...</p>
+                        </More> : <></>
                 }
                 {
-                    (data?.cities?.length && tabStatus === "region") ? <p onClick={() => setModalParty(true)} style={{ fontSize: "13px", textTransform: "uppercase", cursor: "pointer", marginTop: "30px" }}>Посмотреть подробнее...</p> : <></>
+
+                    (data?.cities?.length && tabStatus === "region") ?
+                        <More>
+                            <MoreIcon />
+                            <p onClick={() => setModalParty(true)} style={{ fontSize: "13.5px", textTransform: "", cursor: "pointer" }}>Посмотреть подробнее...</p>
+                        </More> : <></>
                 }
-            </Box>
+            </Adaptive>
         </>
     );
 }
 
 export default InfoBlog;
+
+const Adaptive = styled(Box)`
+    @media screen and (max-width:767px) {
+    margin-top:20px;
+  }
+`
+
+const More = styled('div')`
+    margin-top:30px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+
+    & svg {
+        width:20px;
+        height:20px;
+    }
+
+    &:hover {
+        & p {
+            color:var(--main)
+        }
+    }
+`
 
 const NewDesktop = styled(Box)`
 
