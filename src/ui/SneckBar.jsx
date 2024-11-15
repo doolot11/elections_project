@@ -4,11 +4,11 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 
-export default function SneckBar({text}) {
+export default function SneckBar({text,v,h}) {
     const [state, setState] = React.useState({
         open: true,
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: `${v}`,
+        horizontal: `${h}`,
     });
     const { vertical, horizontal, open } = state;
 

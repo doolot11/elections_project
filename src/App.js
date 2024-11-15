@@ -98,9 +98,20 @@ function App() {
   }
   return (
   <>
-   {
-        value === 0 ? <SneckBar text={"Нажмите по региону для подробной информации"}/> : <SneckCity text={"Выберите город для подробной информации"}/>
+  <NotifContinainer>
+    <div className="desk">
+      {
+          value === 0 ? <SneckBar v={"top"} h={"right"} text={"Нажмите по региону для подробной информации"}/> : <SneckCity v={"top"} h={"right"} text={"Выберите город для подробной информации"}/>
       }
+    </div>
+    <div className="mob">
+      {
+          value === 0 ? <SneckBar v={"bottom"} h={"center"} text={"Нажмите по региону для подробной информации"}/> : <SneckCity v={"bottom"} h={"center"} text={"Выберите город для подробной информации"}/>
+      }
+    </div>
+
+  </NotifContinainer>
+    
     <Box sx={{ display: "flex", flexDirection: "column", gap: "auto" }}>
       <Box sx={{ background: "white", textAlign: "center", padding: "0" }}>
         {/* <h1 style={{ color: "var(--main)", fontWeight: "500", fontSize: "35px" }}>Парламент 2024</h1> */}
@@ -123,8 +134,8 @@ function App() {
             },
           }}
         >
-          <Tab value={0} {...a11yProps(0)} sx={{ "&.Mui-selected": { color: "white" }, fontFamily: "gotham" }} label="ЕДИНЫЙ ОКРУГ" />
-          {value !== 0 && <Tab value={1} {...a11yProps(1)} sx={{ "&.Mui-selected": { color: "white" }, fontFamily: "gotham" }} label={value === 0 ? "" : regionTitle?.name} /> }
+          <Tab value={0} {...a11yProps(0)} sx={{ "&.Mui-selected": { color: "white" }, fontFamily: "roboto" }} label="ЕДИНЫЙ ОКРУГ" />
+          {value !== 0 && <Tab value={1} {...a11yProps(1)} sx={{ "&.Mui-selected": { color: "white" }, fontFamily: "roboto" }} label={value === 0 ? "" : regionTitle?.name} /> }
         </Tabs>
       </Box>
       <ContinerBlog>
@@ -145,6 +156,20 @@ function App() {
 }
 
 export default App;
+
+const NotifContinainer = styled(Box)`
+  .mob {
+    display: none;
+  }
+  @media screen and (max-width:767px) {
+    .desk {
+      display:none;
+    }
+    .mob{
+      display: block;
+    }
+  }
+`
 
 const WrapperCities = styled(Box)`
   width: 100%;
