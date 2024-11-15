@@ -10,7 +10,6 @@ const MapTest = ({ setData ,setValue,setRegionTitle}) => {
 
   
   const getCities = async (id) => {
-    console.log("id",id);
     try {
       const result = await fetchData(id)
       console.log("cities podrobno=", result)
