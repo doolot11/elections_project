@@ -9,20 +9,25 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 // import required modules
-import { Pagination , Navigation} from 'swiper/modules';
+import { Pagination, Navigation } from 'swiper/modules';
 import Counter from '../ui/CounterAnimate';
 import styled from '@emotion/styled';
 
-export default function Carousel({data,tabStatus}) {
-  console.log("data carousel",data);
-  
+export default function Carousel({ data, tabStatus, getCitiesWithParty }) {
+  console.log("data carousel", data);
+  // const [searchParams, setSearchParams] = useSearchParams();
+
+  // function getCitiesWithParty(e){
+  //   console.log(e);
+  // }
+
   return (
     <Continer>
       <Swiper
         slidesPerView={5}
         navigation={true}
         spaceBetween={20}
-        modules={[Pagination , Navigation]}
+        modules={[Pagination, Navigation]}
         className="mySwiper"
         breakpoints={{
           200: {
@@ -37,42 +42,44 @@ export default function Carousel({data,tabStatus}) {
             width: 768,
             slidesPerView: 2.5,
           },
-          992:{
+          992: {
             width: 992,
             slidesPerView: 4,
           },
-          1200:{
+          1200: {
             width: 1200,
             slidesPerView: 5,
           },
-          1400:{
+          1400: {
             width: 1400,
             slidesPerView: 6,
           }
-        }}        
-      >    
-          {
-            tabStatus === "region" ? (<></>) :
-                (<>
-                    {
-                        data?.cities?.map(i => (
-                          <SwiperSlide>
-                          <Box sx={{height:"auto",overflow:'hidden',textAlign:"center",background:"rgba(0, 0, 0, 0.46)"}}>
-                            <img style={{objectFit:"cover", textAlign:"center"}} src={i?.logo} alt="Логотип партии" />
-                            <Box sx={{padding:"5px 0",textAlign:"center"}}>
-                            <p style={{color:"white",fontSize:"25px",fontWeight:"700",textAlign:"center"}}>
-                              <Counter targetNumber={i?.percent} parametrs={"%"} />
-                            </p>
-                            </Box>
-                          </Box>
-                      </SwiperSlide>
-                        ))
-                    }
-                </>)
+        }}
+      >
+        {
+          // tabStatus === "region" ? (<></>) :
+            (<>
+              {
+                data?.cities?.map(i => (
+                  <SwiperSlide onClick={() => getCitiesWithParty(i)}>
+                    <Box sx={{ height: "auto", overflow: 'hidden', textAlign: "center", background: "rgba(0, 0, 0, 0.46)", width: "210px" }}>
+                      <Box sx={{height: "150px", display: "flex", justifyContent: "center", alignItems: "center", paddiing: "4px"}}>
+                        <img style={{  width: "100%" }} src={i?.logo} alt="Логотип партии" />
+                      </Box>
+                      <Box sx={{ padding: "5px 0", textAlign: "center" }}>
+                        <p style={{ color: "white", fontSize: "25px", fontWeight: "700", textAlign: "center" }}>
+                          <Counter targetNumber={i?.percent} parametrs={"%"} />
+                        </p>
+                      </Box>
+                    </Box>
+                  </SwiperSlide>
+                ))
+              }
+            </>)
         }
-        
-       
-        
+
+
+
       </Swiper>
     </Continer>
   );
