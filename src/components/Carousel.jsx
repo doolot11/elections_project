@@ -67,7 +67,7 @@ export default function Carousel({statusParties, data, tabStatus, getCitiesWithP
                     }}>
                     <Box sx={{ height: "auto", overflow: 'hidden', textAlign: "center", background: "rgba(0, 0, 0, 0.46)", width: "210px" }}>
                       <Box sx={{height: "150px", display: "flex", justifyContent: "center", alignItems: "center", paddiing: "4px",overflow: 'hidden'}}>
-                        <img style={{  width: "100%" }} src={i?.logo} alt="Логотип партии" />
+                        <img style={{  width: "100%" }} src={i?.logo} alt={i.name} />
                       </Box>
                       <Box sx={{ padding: "5px 0", textAlign: "center"}}>
                         <p style={{ color: "white", fontSize: "25px", fontWeight: "700", textAlign: "center" }}>

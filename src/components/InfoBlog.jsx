@@ -9,7 +9,7 @@ import cities from "../data/cities.json"
 import { ReactComponent as MoreIcon } from "../images/svg/more.svg"
 
 
-function InfoBlog({loadingCities, data, votesOfCities, tabStatus, setData, setTab, statisticParam }) {
+function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setTab, statisticParam }) {
 
     const [modal, setModal] = useState(false)
     const [modalParty, setModalParty] = useState(false)
@@ -36,7 +36,7 @@ function InfoBlog({loadingCities, data, votesOfCities, tabStatus, setData, setTa
                         (<>
                             {
                                 data?.cities?.map(i => (
-                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px", gap: "15px" }}>
                                         <p style={{ fontSize: "13px" }}>{i?.name}</p>
                                         <Counter targetNumber={i?.percent} parametrs={"%"} />
                                     </Box>
@@ -46,10 +46,10 @@ function InfoBlog({loadingCities, data, votesOfCities, tabStatus, setData, setTa
                 }
             </ModalWindow>
             <ModalWindow open={modalParty} handleClose={() => setModalParty(false)} width="450px">
-            <Typography sx={{ fontSize: "18px", fontWeight: "400", borderBottom: "1px solid black" }}>Подробная информация</Typography>
-            {
+                <Typography sx={{ fontSize: "18px", fontWeight: "400", borderBottom: "1px solid black" }}>Подробная информация</Typography>
+                {
                     votesOfCities?.map(i => (
-                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px", gap:"15px" }}>
+                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px", gap: "15px" }}>
                             <p style={{ fontSize: "13px" }}>{cities.find((city) => city.slug === i.city_slug)?.name
                             }</p>
                             <Counter targetNumber={i?.percent} parametrs={"%"} />
@@ -70,8 +70,24 @@ function InfoBlog({loadingCities, data, votesOfCities, tabStatus, setData, setTa
                     <div>
                         <SelectCustom setData={setData} setTab={setTab} data={data?.cities} tabStatus={tabStatus} title={"Выберите город"} />
                     </div> */}
-                    
+
                 </ContainerTitle>
+                <Box sx={{ padding: "0 7px" }}>
+                    {loadingCities &&
+                        <>
+                            {[...Array(10)].map((_, index) => (
+                                <Box key={"city" + index + "c"} sx={{
+                                    display: "flex",  justifyContent: "space-between",
+                                    margin: "15px 0"
+                                }}>
+                                    <Skeleton variant="rectangular" sx={{width: "100%",  height: "10px" }}>
+
+                                    </Skeleton>
+                                </Box>
+                            ))}
+                        </>
+                    }
+                </Box>
                 {/* <Desktop sx={{display: "flex", flexDirection: "column", gap: "2px", padding: "0 10px", height: "100%", width:"100%", overflowY: "scroll", maxHeight: "400px", overflowY: "scroll" , borderRadius:"5px" }}>
                     {
                         tabStatus === "region" ? (<>
@@ -127,8 +143,8 @@ function InfoBlog({loadingCities, data, votesOfCities, tabStatus, setData, setTa
                     {
                         tabStatus === "region" ? (<>
                             {
-                                votesOfCities?.map(i => (
-                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
+                                votesOfCities?.slice(0, 10).map(i => (
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px", gap: "15px" }}>
                                         <p style={{ fontSize: "13px" }}>{cities.find((city) => city.slug === i.city_slug)?.name
                                         }</p>
                                         <Counter targetNumber={i?.percent} parametrs={"%"} />
@@ -138,8 +154,8 @@ function InfoBlog({loadingCities, data, votesOfCities, tabStatus, setData, setTa
                         </>) :
                             (<>
                                 {
-                                    data?.cities?.map(i => (
-                                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
+                                    data?.cities?.slice(0, 10).map(i => (
+                                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px", gap: "15px" }}>
                                             <p style={{ fontSize: "13px" }}>{i?.name}</p>
                                             <Counter targetNumber={i?.percent} parametrs={"%"} />
                                         </Box>
@@ -153,8 +169,8 @@ function InfoBlog({loadingCities, data, votesOfCities, tabStatus, setData, setTa
                     {
                         tabStatus === "region" ? (<>
                             {
-                                votesOfCities?.map(i => (
-                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
+                                votesOfCities?.slice(0, 10).map(i => (
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px", gap: "15px" }}>
                                         <p style={{ fontSize: "13px" }}>{cities.find((city) => city.slug === i.city_slug)?.name
                                         }</p>
                                         <Counter targetNumber={i?.percent} parametrs={"%"} />
@@ -164,8 +180,8 @@ function InfoBlog({loadingCities, data, votesOfCities, tabStatus, setData, setTa
                         </>) :
                             (<>
                                 {
-                                    data?.cities?.map(i => (
-                                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px",gap:"15px" }}>
+                                    data?.cities?.slice(0, 10).map(i => (
+                                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px", gap: "15px" }}>
                                             <p style={{ fontSize: "13px" }}>{i?.name} 12</p>
                                             <Counter targetNumber={i?.percent} parametrs={"%"} />
                                         </Box>
