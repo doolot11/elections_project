@@ -265,6 +265,12 @@ const More = styled('div')`
 
 const NewDesktop = styled(Box)`
     padding: 0 5px;
+    div:first-child{
+        border-bottom: 1px solid black;
+        padding-bottom:3px;
+    }
+
+
     @media screen and (max-width:767px ) {
         display:none;
     }
