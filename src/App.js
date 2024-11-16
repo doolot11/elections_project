@@ -115,7 +115,7 @@ function App() {
     <Box sx={{ display: "flex", flexDirection: "column", gap: "auto" }}>
       <Box sx={{ background: "white", textAlign: "center", padding: "0" }}>
         {/* <h1 style={{ color: "var(--main)", fontWeight: "500", fontSize: "35px" }}>Парламент 2024</h1> */}
-        <img style={{ height: "130px" }} src={logoIcon} alt="Логотип" />
+        <img style={{ height: "130px", padding: "10px 0" }} src={logoIcon} alt="Логотип" />
       </Box>
       <Box>
         <TabPanel value={value} index={1}>
