@@ -1,7 +1,8 @@
 
 
 export const fetchData = async (url, headers = {}) => {
-    const base_url = `https://shailoo.info//api/${url}`
+    const base_url = `https://dobush.kg//api/${url}`
+    // const base_url = `https://shailoo.info//api/${url}`
     // const base_url = `https://ba-election-project.onrender.com/api/${url}`
 
     try {
