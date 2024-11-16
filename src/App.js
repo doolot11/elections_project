@@ -134,7 +134,7 @@ function App() {
           </Box>
         </ContainerMainTitle>
         {
-          (value === 1 && (data?.cities?.length || data?.parties?.length)) &&
+          (value === 1 && (data?.cities?.length || data?.parties?.length || "")) &&
           <Box sx={{ textAlign: "center", padding: "10px 0" }}>
             <h3 style={{ fontWeight: "500", color: "white" }}>Итоги голосования на выборах депутатов местных кенешей</h3>
           </Box>
