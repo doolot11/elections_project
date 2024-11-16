@@ -96,13 +96,13 @@ const MapTest = ({ setData, setValue, setRegionTitle }) => {
           }));
         }} className='osh'></span>
       </Tooltip>
-      <span className='chui_title'>Чүй</span>
+      <span className='chui_title'>Чуй</span>
       <span className='osh_title'>Ош</span>
-      <span className='kol_title'>Ысык-Көл</span>
+      <span className='kol_title'>Иссык-Куль</span>
       <span className='naryn_title'>Нарын</span>
       <span className='talas_title'>Талас</span>
       <span className='batken_title'>Баткен</span>
-      <span className='jalalabad_title'>Жалал-Абад</span>
+      <span className='jalalabad_title'>Джалал-Абад</span>
 
     </Container>
   );
