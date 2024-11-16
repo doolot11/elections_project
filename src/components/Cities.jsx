@@ -4,13 +4,12 @@ import cities from "../data/cities.json"
 import { fetchData } from "../services/requests";
 import { ReactComponent as CityIcon } from "../images/svg/city.svg"
 
-function Cities({ regionTitle ,setData,setTab,setStatisticParam ,isLoadingParties}) {
+function Cities({ regionTitle ,setData,setTab,setStatisticParam ,isLoadingParties ,setDetailInfo}) {
 
   const getCities = async (id) => {
     // setTab("city")
     isLoadingParties(true)
     try {
-      
       const result = await fetchData(`get-parties/?city=${id}`)
       console.log("cities podrobno=", result)
       setData((prevData) => ({
@@ -23,6 +22,19 @@ function Cities({ regionTitle ,setData,setTab,setStatisticParam ,isLoadingPartie
       console.log(error);
     }
   }
+
+  const getInfoDetail = async (id) => {
+    // setTab("city")
+    try {
+      const result = await fetchData(`count-voutes/?city=${id}`)
+      console.log("cities podrobno=", result)
+      setDetailInfo(result)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
 
   return (
     <Adaptive sx={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px" }}>
@@ -38,6 +50,7 @@ function Cities({ regionTitle ,setData,setTab,setStatisticParam ,isLoadingPartie
                       // setData(i.data)
                       setTab("city")
                       setStatisticParam("г.Бишкек")
+                      getInfoDetail('bishkek')
                     }}
                   >
                     <CityIcon />
@@ -51,6 +64,7 @@ function Cities({ regionTitle ,setData,setTab,setStatisticParam ,isLoadingPartie
                       getCities("osh")
                       // setData(i.data)
                       setTab("city")
+                      getInfoDetail('osh')
                       setStatisticParam("г.Ош")
                     }}
                   >
@@ -69,6 +83,7 @@ function Cities({ regionTitle ,setData,setTab,setStatisticParam ,isLoadingPartie
                     getCities(i?.slug)
                     setData(i.data)
                     setTab("city")
+                    getInfoDetail(i?.slug)
                     setStatisticParam(i?.name)
                   }}
                 >

@@ -22,6 +22,7 @@ function App() {
 
   const [votesOfCities, setVotesOfCities] = useState([])
   const [statisticParam,setStatisticParam] = useState("")
+  const [detailInfo,setDetailInfo] = useState({})
 
 
   // dont touch )
@@ -48,6 +49,7 @@ function App() {
         name: "",
         region_id: null,
       })
+      setDetailInfo({})
       console.log("Данные очищены");
     }
   }, [value, setData]);
@@ -100,6 +102,9 @@ function App() {
     setStatusParties(e)
 
   }
+
+  console.log("detailInfo",detailInfo);
+  
   return (
   <>
   <NotifContinainer>
@@ -138,7 +143,7 @@ function App() {
             },
           }}
         >
-          <Tab value={0} {...a11yProps(0)} sx={{ "&.Mui-selected": { color: "white" }, fontFamily: "roboto" }} label="ЕДИНЫЙ ОКРУГ" />
+          <Tab value={0} {...a11yProps(0)} sx={{ "&.Mui-selected": { color: "white" }, fontFamily: "roboto" }} label="Регионы" />
           {value !== 0 && <Tab value={1} {...a11yProps(1)} sx={{ "&.Mui-selected": { color: "white" }, fontFamily: "roboto" }} label={value === 0 ? "" : regionTitle?.name} /> }
         </Tabs>
       </Box>
@@ -149,8 +154,8 @@ function App() {
         <TabPanel value={value} index={1}>
           {/* <MapWithCities setTab={setTab} setData={setData} /> */}
           <WrapperCities>
-            <Cities isLoadingParties={isLoadingParties} setStatisticParam={setStatisticParam} setTab={setTab} setData={setData} regionTitle={regionTitle} />
-            <InfoBlog loadingCities={loadingCities} statisticParam={statisticParam} setTab={setTab} setData={setData} votesOfCities={votesOfCities} tabStatus={tab} data={data} />
+            <Cities setDetailInfo={setDetailInfo} isLoadingParties={isLoadingParties} setStatisticParam={setStatisticParam} setTab={setTab} setData={setData} regionTitle={regionTitle} />
+            <InfoBlog detailInfo={detailInfo} loadingCities={loadingCities} statisticParam={statisticParam} setTab={setTab} setData={setData} votesOfCities={votesOfCities} tabStatus={tab} data={data} />
           </WrapperCities>
         </TabPanel>
       </ContinerBlog>
