@@ -74,28 +74,35 @@ const MapTest = ({ setData, setValue, setRegionTitle }) => {
 
       <Tooltip title="г.Бишкек">
         <span onClick={() => {
-            setValue(1)
-            setRegionTitle((prevState) => ({
-              ...prevState,
-              name: "г.Бишкек",
-              region_id: '',
-              city_main:'bishkek'
-            }));
+          setValue(1)
+          setRegionTitle((prevState) => ({
+            ...prevState,
+            name: "г.Бишкек",
+            region_id: '',
+            city_main: 'bishkek'
+          }));
         }} className='bishkek'></span>
-        </Tooltip>
+      </Tooltip>
 
       {/* <Tooltip title="Ош"><span className='osh'></span></Tooltip> */}
       <Tooltip title="г.Ош">
         <span onClick={() => {
-            setValue(1)
-            setRegionTitle((prevState) => ({
-              ...prevState,
-              name: "г.Ош",
-              region_id: '',
-              city_main:'osh'
-            }));
+          setValue(1)
+          setRegionTitle((prevState) => ({
+            ...prevState,
+            name: "г.Ош",
+            region_id: '',
+            city_main: 'osh'
+          }));
         }} className='osh'></span>
-        </Tooltip>
+      </Tooltip>
+      <span className='chui_title'>Чүй</span>
+      <span className='osh_title'>Ош</span>
+      <span className='kol_title'>Ысык-Көл</span>
+      <span className='naryn_title'>Нарын</span>
+      <span className='talas_title'>Талас</span>
+      <span className='batken_title'>Баткен</span>
+      <span className='jalalabad_title'>Жалал-Абад</span>
 
     </Container>
   );
@@ -132,6 +139,49 @@ const Container = styled(Box)`
     background-color: red;
     border-radius: 50%;
   }
+  .chui_title {
+    position: absolute;
+    z-index: 1;
+    top: 11%;
+    left: 42%;
+    font-weight: bold;
+  }
+  .kol_title {
+    position: absolute;
+    z-index: 1;
+    top: 18%;
+    left: 72%;font-weight: bold;
+  }
+  .batken_title {
+    position: absolute;
+    z-index: 1;
+    top: 62%;
+    left: 12%;font-weight: bold;
+  }
+  .jalalabad_title {
+    position: absolute;
+    z-index: 1;
+    top: 30%;
+    left: 22%;font-weight: bold;
+  }
+  .naryn_title {
+    position: absolute;
+    z-index: 1;
+    top: 35%;
+    left: 52%;font-weight: bold;
+  }
+  .talas_title {
+    position: absolute;
+    z-index: 1;
+    top: 13%;
+    left: 20%;font-weight: bold;
+  }
+  .osh_title {
+    position: absolute;
+    z-index: 1;
+    top: 57%;
+    left: 35%;font-weight: bold;
+  }
 
 
   @media screen and (max-width:1200px) {
@@ -151,6 +201,12 @@ const Container = styled(Box)`
     .bishkek , .osh {
       width: 15px;
       height:15px;
+    }
+  }
+  @media screen and (max-width:576px) {
+    .osh_title , .chui_title, .batken_title ,.talas_title,.jalalabad_title,.naryn_title,.kol_title {
+     font-size: 10px;
+     font-weight: 400;
     }
   }
 `

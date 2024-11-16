@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Tab, Tabs, Typography } from "@mui/material";
 import MapTest from "./components/MapTest";
 import InfoBlog from "./components/InfoBlog";
 import { useEffect, useState } from "react";
@@ -126,9 +126,11 @@ function App() {
           {/* <h1 style={{ color: "var(--main)", fontWeight: "500", fontSize: "35px" }}>Парламент 2024</h1> */}
           <Box className="title-container">
             <Box>
-              <img  onClick={() => setValue(0)} style={{ height: "110px", padding: "10px 0",cursor:"pointer" }} src={logoIcon} alt="Логотип" />
+              <img onClick={() => setValue(0)} style={{ height: "110px", padding: "10px 0", cursor: "pointer" }} src={logoIcon} alt="Логотип" />
             </Box>
-            <h2>Выборы депутатов местных кенешей Кыргызской Республики - 17 ноября 2024 года </h2>
+            <Typography sx={{ "h2": { xs: { fontSize: "14px" }, md: { fontSize: "24px" } } }}>
+              <h2>Выборы депутатов местных кенешей Кыргызской Республики - 17 ноября 2024 года </h2>
+            </Typography>
           </Box>
         </ContainerMainTitle>
         {
