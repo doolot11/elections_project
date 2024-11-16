@@ -9,7 +9,7 @@ import cities from "../data/cities.json"
 import { ReactComponent as MoreIcon } from "../images/svg/more.svg"
 
 
-function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setTab, statisticParam }) {
+function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setTab, statisticParam, detailInfo }) {
 
     const [modal, setModal] = useState(false)
     const [modalParty, setModalParty] = useState(false)
@@ -17,10 +17,31 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
     const handleOpenModal = () => setModal(true)
     const handleCloseModal = () => setModal(false)
 
+    console.log("detailInfo in modal",);
+
+    
     return (
         <>
             <ModalWindow open={modal} handleClose={handleCloseModal} width="450px">
-                <Typography sx={{ fontSize: "18px", fontWeight: "400", borderBottom: "1px solid black" }}>Подробная информация</Typography>
+                <Typography sx={{ fontSize: "18px", fontWeight: "400" }}>Подробная информация</Typography>
+                <Box sx={{borderTop: "1px solid black",borderBottom:"1px solid black",padding:"5px 0",display:"flex",flexDirection:"column",gap:"8px" }}>
+                    <Box sx={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:"15px",width:"100%"}}>
+                        <p style={{ fontSize: "13px",width:"80%" }}>Число избирателей включенных в список избирателей на избирательном участке</p>
+                        <p style={{ fontSize: "13px",width:"" }}>{detailInfo?.three}</p>
+                    </Box>
+                    <Box sx={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:"15px",width:"100%"}}>
+                        <p style={{ fontSize: "13px",width:"80%" }}>Общее число избирателей получивших избирательных бюллетеней</p>
+                        <p style={{ fontSize: "13px",width:"" }}>{detailInfo?.five}</p>
+                    </Box>
+                    <Box sx={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:"15px",width:"100%"}}>
+                        <p style={{ fontSize: "13px",width:"80%" }}>Число действительных избирательных бюллетеней</p>
+                        <p style={{ fontSize: "13px",width:"" }}>{detailInfo?.seven}</p>
+                    </Box>
+                    <Box sx={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:"15px",width:"100%"}}>
+                        <p style={{ fontSize: "13px",width:"80%" }}>Число недействительных избирательных бюллетеней</p>
+                        <p style={{ fontSize: "13px",width:"" }}>{detailInfo?.eight}</p>
+                    </Box>
+                </Box>
                 {
                     tabStatus === "region" ? (<>
                         {/* {
