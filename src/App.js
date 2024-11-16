@@ -21,8 +21,8 @@ function App() {
   })
 
   const [votesOfCities, setVotesOfCities] = useState([])
-  const [statisticParam,setStatisticParam] = useState("")
-  const [detailInfo,setDetailInfo] = useState({})
+  const [statisticParam, setStatisticParam] = useState("")
+  const [detailInfo, setDetailInfo] = useState({})
 
 
   // dont touch )
@@ -103,63 +103,75 @@ function App() {
 
   }
 
-  console.log("detailInfo",detailInfo);
-  
-  return (
-  <>
-  <NotifContinainer>
-    <div className="desk">
-      {
-          value === 0 ? <SneckBar v={"top"} h={"right"} text={"Нажмите по региону для подробной информации"}/> : <SneckCity v={"top"} h={"right"} text={"Выберите город для подробной информации"}/>
-      }
-    </div>
-    <div className="mob">
-      {
-          value === 0 ? <SneckBar v={"bottom"} h={"center"} text={"Нажмите по региону для подробной информации"}/> : <SneckCity v={"bottom"} h={"center"} text={"Выберите город для подробной информации"}/>
-      }
-    </div>
+  console.log("detailInfo", detailInfo);
 
-  </NotifContinainer>
-    
-    <Box sx={{ display: "flex", flexDirection: "column", gap: "auto" }}>
-      <Box sx={{ background: "white", textAlign: "center", padding: "0" }}>
-        {/* <h1 style={{ color: "var(--main)", fontWeight: "500", fontSize: "35px" }}>Парламент 2024</h1> */}
-        <img style={{ height: "130px", padding: "10px 0" }} src={logoIcon} alt="Логотип" />
+  return (
+    <>
+      <NotifContinainer>
+        <div className="desk">
+          {
+            value === 0 ? <SneckBar v={"top"} h={"right"} text={"Нажмите по региону для подробной информации"} /> : <SneckCity v={"top"} h={"right"} text={"Выберите город для подробной информации"} />
+          }
+        </div>
+        <div className="mob">
+          {
+            value === 0 ? <SneckBar v={"bottom"} h={"center"} text={"Нажмите по региону для подробной информации"} /> : <SneckCity v={"bottom"} h={"center"} text={"Выберите город для подробной информации"} />
+          }
+        </div>
+
+      </NotifContinainer>
+
+      <Box sx={{ display: "flex", flexDirection: "column", gap: "auto" }}>
+        <ContainerMainTitle>
+          {/* <h1 style={{ color: "var(--main)", fontWeight: "500", fontSize: "35px" }}>Парламент 2024</h1> */}
+          <Box className="title-container">
+            <Box>
+              <img  onClick={() => setValue(0)} style={{ height: "110px", padding: "10px 0",cursor:"pointer" }} src={logoIcon} alt="Логотип" />
+            </Box>
+            <h2>Выборы депутатов местных кенешей Кыргызской Республики - 17 ноября 2024 года </h2>
+          </Box>
+        </ContainerMainTitle>
+        {
+          (value === 1 && (data?.cities?.length || data?.parties?.length)) &&
+          <Box sx={{ textAlign: "center", padding: "10px 0" }}>
+            <h3 style={{ fontWeight: "500", color: "white" }}>Итоги голосования на выборах депутатов местных кенешей</h3>
+          </Box>
+        }
+
+        <Box>
+          <TabPanel value={value} index={1}>
+            <Carousel statusParties={statusParties} setStatisticParam={setStatisticParam} getCitiesWithParty={getCitiesWithParty} data={data} tabStatus={tab} />
+          </TabPanel>
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Tabs
+            value={value}
+            variant="scrollable"
+            onChange={handleChange}
+            textColor="inherit"
+            TabIndicatorProps={{
+              style: {
+                backgroundColor: "white",
+              },
+            }}
+          >
+            <Tab value={0} {...a11yProps(0)} sx={{ "&.Mui-selected": { color: "white" }, fontFamily: "roboto" }} label="Регионы" />
+            {value !== 0 && <Tab value={1} {...a11yProps(1)} sx={{ "&.Mui-selected": { color: "white" }, fontFamily: "roboto" }} label={value === 0 ? "" : regionTitle?.name} />}
+          </Tabs>
+        </Box>
+        <ContinerBlog>
+          <TabPanel value={value} index={0}>
+            <MapTest setRegionTitle={setRegionTitle} setValue={setValue} setData={setData} />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            {/* <MapWithCities setTab={setTab} setData={setData} /> */}
+            <WrapperCities>
+              <Cities setDetailInfo={setDetailInfo} isLoadingParties={isLoadingParties} setStatisticParam={setStatisticParam} setTab={setTab} setData={setData} regionTitle={regionTitle} />
+              <InfoBlog detailInfo={detailInfo} loadingCities={loadingCities} statisticParam={statisticParam} setTab={setTab} setData={setData} votesOfCities={votesOfCities} tabStatus={tab} data={data} />
+            </WrapperCities>
+          </TabPanel>
+        </ContinerBlog>
       </Box>
-      <Box>
-        <TabPanel value={value} index={1}>
-          <Carousel statusParties={statusParties} setStatisticParam={setStatisticParam} getCitiesWithParty={getCitiesWithParty} data={data} tabStatus={tab} />
-        </TabPanel>
-      </Box>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Tabs
-          value={value}
-          variant="scrollable"
-          onChange={handleChange}
-          textColor="inherit"
-          TabIndicatorProps={{
-            style: {
-              backgroundColor: "white",
-            },
-          }}
-        >
-          <Tab value={0} {...a11yProps(0)} sx={{ "&.Mui-selected": { color: "white" }, fontFamily: "roboto" }} label="Регионы" />
-          {value !== 0 && <Tab value={1} {...a11yProps(1)} sx={{ "&.Mui-selected": { color: "white" }, fontFamily: "roboto" }} label={value === 0 ? "" : regionTitle?.name} /> }
-        </Tabs>
-      </Box>
-      <ContinerBlog>
-        <TabPanel value={value} index={0}>
-          <MapTest setRegionTitle={setRegionTitle} setValue={setValue} setData={setData} />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          {/* <MapWithCities setTab={setTab} setData={setData} /> */}
-          <WrapperCities>
-            <Cities setDetailInfo={setDetailInfo} isLoadingParties={isLoadingParties} setStatisticParam={setStatisticParam} setTab={setTab} setData={setData} regionTitle={regionTitle} />
-            <InfoBlog detailInfo={detailInfo} loadingCities={loadingCities} statisticParam={statisticParam} setTab={setTab} setData={setData} votesOfCities={votesOfCities} tabStatus={tab} data={data} />
-          </WrapperCities>
-        </TabPanel>
-      </ContinerBlog>
-    </Box>
     </>
   );
 }
@@ -201,6 +213,21 @@ const WrapperCities = styled(Box)`
     width:90%;
   }
 
+`
+
+const ContainerMainTitle = styled(Box)`
+  background: white;
+  .title-container {
+    width:80%;
+    margin:0 auto;
+    display:flex;
+    align-items: center;
+    gap:20px;
+
+    @media screen and (max-width:767px) {
+      width:90%;
+    }
+  }
 `
 
 const ContinerBlog = styled(Box)`

@@ -30,7 +30,7 @@
   {
     "id": "3121",
     "name": "\u0411\u0438\u0448\u043a\u0435\u043a",
-    "region_id": 8,
+    "region_id": "",
     "slug": "bishkek",
     "path": ""
   },
@@ -156,7 +156,7 @@
   {
     "id": "3122",
     "name": "\u041e\u0448",
-    "region_id": 6,
+    "region_id": "",
     "slug": "osh",
     "path": ""
   },
