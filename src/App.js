@@ -44,6 +44,10 @@ function App() {
       });
       setVotesOfCities([])
       setStatisticParam("")
+      setRegionTitle({
+        name: "",
+        region_id: null,
+      })
       console.log("Данные очищены");
     }
   }, [value, setData]);

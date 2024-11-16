@@ -38,7 +38,10 @@ function InfoBlog({ loadingCities, data, votesOfCities, tabStatus, setData, setT
                                 data?.cities?.map(i => (
                                     <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "black", marginTop: "10px", gap: "15px" }}>
                                         <p style={{ fontSize: "13px" }}>{i?.name}</p>
-                                        <Counter targetNumber={i?.percent} parametrs={"%"} />
+                                        <Box sx={{display:"flex",alignItems:"center",gap:"5px"}}>
+                                            <Counter targetNumber={i?.percent} parametrs={"%"} />
+                                            <p style={{ fontSize: "13px",color:"var(--green)" }}>{`(${i?.count})`}</p>
+                                        </Box>
                                     </Box>
                                 ))
                             }
