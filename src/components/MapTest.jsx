@@ -96,13 +96,16 @@ const MapTest = ({ setData, setValue, setRegionTitle }) => {
           }));
         }} className='osh'></span>
       </Tooltip>
-      <span className='chui_title'>Чуй</span>
-      <span className='osh_title'>Ош</span>
-      <span className='kol_title'>Иссык-Куль</span>
-      <span className='naryn_title'>Нарын</span>
-      <span className='talas_title'>Талас</span>
-      <span className='batken_title'>Баткен</span>
-      <span className='jalalabad_title'>Джалал-Абад</span>
+      <span className='chui_title region-title'>Чуйская <br className='active_mobile'></br> область </span>
+      <span className='osh_title region-title'>Ошская <br className='active_mobile'></br> область</span>
+      <span className='kol_title region-title'>Иссык-Кульская <br className='active_mobile'></br> область</span>
+      <span className='naryn_title region-title'>Нарынская <br className='active_mobile'></br> область</span>
+      <span className='talas_title region-title'>Таласская <br className='active_mobile'></br> область</span>
+      <span className='batken_title region-title'>Баткенская <br className='active_mobile'></br> область</span>
+      <span className='jalalabad_title region-title'>Джалал-Абадская <br className='active_mobile'></br> область</span>
+      
+      <span className='bishkek_title region-title'>г.Бишкек <br className='active_mobile'></br> </span>
+      <span className='osh_titles region-title'>г.Ош <br className='active_mobile'></br> </span>
 
     </Container>
   );
@@ -118,10 +121,30 @@ const ContainerSvg = styled(Box)`
 const Container = styled(Box)`
   position: relative;
 
+  .active_mobile {
+    display:none;
+  } 
+  .bishkek_title {
+    position: absolute;
+    top: 7%;
+    left: 43.5%;
+    z-index: 1;
+    color:red;
+  }
+
+  .osh_titles {
+    position: absolute;
+    bottom: 45%;
+    left: 38.5%;
+    z-index: 1;
+    color:red;
+  }
+  
+
   .bishkek {
     position: absolute;
     z-index: 1;
-    top: 7%;
+    top: 6%;
     left: 40%;
     width: 25px;
     height:25px;
@@ -143,44 +166,46 @@ const Container = styled(Box)`
     position: absolute;
     z-index: 1;
     top: 11%;
-    left: 42%;
+    left: 40%;
     font-weight: bold;
   }
   .kol_title {
     position: absolute;
     z-index: 1;
     top: 18%;
-    left: 72%;font-weight: bold;
+    left: 67%;font-weight: bold;
   }
   .batken_title {
     position: absolute;
     z-index: 1;
-    top: 62%;
-    left: 12%;font-weight: bold;
+    top: 63%;
+    left: 5%;
+    font-weight: bold;
   }
   .jalalabad_title {
     position: absolute;
     z-index: 1;
-    top: 30%;
-    left: 22%;font-weight: bold;
+    top: 28%;
+    left: 16%;
+    font-weight: bold;
   }
   .naryn_title {
     position: absolute;
     z-index: 1;
     top: 35%;
-    left: 52%;font-weight: bold;
+    left: 49%;font-weight: bold;
   }
   .talas_title {
     position: absolute;
     z-index: 1;
     top: 13%;
-    left: 20%;font-weight: bold;
+    left: 17%;font-weight: bold;
   }
   .osh_title {
     position: absolute;
     z-index: 1;
     top: 57%;
-    left: 35%;font-weight: bold;
+    left: 28%;font-weight: bold;
   }
 
 
@@ -188,6 +213,22 @@ const Container = styled(Box)`
     .bishkek , .osh {
       width: 22px;
       height:22px;
+    }
+
+    .region-title {
+      font-size:14px;;
+    }
+  }
+
+  @media screen and (max-width:992px) {
+    .active_mobile{
+      display:block;
+    }
+  }
+
+  @media screen and (max-width:767px) {
+    .region-title {
+      font-size:12px;;
     }
   }
   @media screen and (max-width:1200px) {
