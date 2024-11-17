@@ -4,7 +4,7 @@ const Counter = ({ targetNumber, parametrs }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const target = parseInt(targetNumber, 10);
+    const target = parseFloat(targetNumber); // Используем parseFloat для чисел с дробной частью
 
     if (isNaN(target)) {
       console.error("Некорректное число!");
