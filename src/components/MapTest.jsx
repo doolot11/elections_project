@@ -96,7 +96,7 @@ const MapTest = ({ setData, setValue, setRegionTitle }) => {
           }));
         }} className='osh'></span>
       </Tooltip>
-      <span className='chui_title region-title'>Чуйская <br className='active_mobile'></br> область</span>
+      <span className='chui_title region-title'>Чуйская <br className='active_mobile'></br> область </span>
       <span className='osh_title region-title'>Ошская <br className='active_mobile'></br> область</span>
       <span className='kol_title region-title'>Иссык-Кульская <br className='active_mobile'></br> область</span>
       <span className='naryn_title region-title'>Нарынская <br className='active_mobile'></br> область</span>
