@@ -10,6 +10,7 @@ import { fetchData } from "./services/requests";
 import Cities from "./components/Cities";
 import SneckBar from "./ui/SneckBar";
 import SneckCity from "./ui/SneckCity";
+import YandexMetrika from "./YandexMetrika";
 
 
 function App() {
@@ -104,9 +105,11 @@ function App() {
   }
 
   console.log("detailInfo", detailInfo);
+  
 
   return (
     <>
+    <YandexMetrika />
       <NotifContinainer>
         <div className="desk">
           {
