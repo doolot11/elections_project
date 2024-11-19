@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 const YandexMetrika = () => {
   useEffect(() => {
+    // Inject Yandex.Metrika script
     (function (m, e, t, r, i, k, a) {
       m[i] = m[i] || function () {
         (m[i].a = m[i].a || []).push(arguments);
@@ -17,28 +18,25 @@ const YandexMetrika = () => {
       k.async = 1;
       k.src = r;
       a.parentNode.insertBefore(k, a);
-    })(
-      window,
-      document,
-      "script",
-      "https://mc.yandex.ru/metrika/tag.js",
-      "ym"
-    );
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
 
-    window.ym(98967993, "init", {
+    // Initialize Yandex.Metrika
+    window.ym = window.ym || function () {};
+    window.ym(98974405, 'init', {
       clickmap: true,
       trackLinks: true,
       accurateTrackBounce: true,
+      webvisor: true,
     });
-  }, []);
+  }, []); // Empty dependency array to ensure this runs only once
 
   return (
     <>
       <noscript>
         <div>
           <img
-            src="https://mc.yandex.ru/watch/98967993"
-            style={{ position: "absolute", left: "-9999px" }}
+            src="https://mc.yandex.ru/watch/98974405"
+            style={{ position: 'absolute', left: '-9999px' }}
             alt=""
           />
         </div>
